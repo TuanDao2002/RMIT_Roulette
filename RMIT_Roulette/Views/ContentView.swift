@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Color("ColorGreen")
+            .ignoresSafeArea()
+            .overlay(
+                Image("roulette_wheel")
+            )
     }
 }
 
