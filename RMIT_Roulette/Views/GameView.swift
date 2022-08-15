@@ -87,31 +87,38 @@ struct GameView: View {
         }
         
         var body: some View {
-            VStack {
-                Text(self.isAnimating ? "Spining\n..." : sectorFromAngle(angle : newAngle))
-                    .multilineTextAlignment(.center)
-                Image("Arrow")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 25, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Image("roulette_wheel")
-                    .resizable()
-                    .scaledToFit()
-                    .rotationEffect(Angle(degrees: spinDegrees))
-                    .frame(width: 245, height: 245, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .animation(spinAnimation)
-                Button("SPIN") {
-                    isAnimating = true
-                    rand = Double.random(in: 1...360)
-                    spinDegrees += 720.0 + rand
-                    newAngle = getAngle(angle: spinDegrees)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
-                        isAnimating = false
+            ZStack {
+                Color("ColorGreen").edgesIgnoringSafeArea(.all)
+                VStack {
+                    Text(self.isAnimating ? "Spining\n..." : sectorFromAngle(angle : newAngle))
+                        .multilineTextAlignment(.center)
+                    Image("red_arrow")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    Image("roulette_wheel")
+                        .resizable()
+                        .scaledToFit()
+                        .rotationEffect(Angle(degrees: spinDegrees))
+                        .frame(width: 245, height: 245, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    Button("SPIN") {
+                        isAnimating = true
+                        rand = Double.random(in: 1...360)
+    //                    spinDegrees += 720.0 + rand
+                        withAnimation(spinAnimation) {
+                            spinDegrees += 720.0 + rand
+                        }
+                        newAngle = getAngle(angle: spinDegrees)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
+                            isAnimating = false
+                        }
                     }
+                    .modifier(ButtonModifier())
+                    .padding(40)
+                    .disabled(isAnimating == true)
                 }
-                .padding(40)
-                .disabled(isAnimating == true)
             }
+    
         }}
 
 struct GameView_Previews: PreviewProvider {
