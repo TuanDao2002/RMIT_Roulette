@@ -15,6 +15,11 @@ struct ContentView: View {
             ZStack {
                 Color("ColorGreen").edgesIgnoringSafeArea(.all)
                 VStack {
+                    Image("roulette_wheel")
+                    Text("RMIT Roulette")
+                        .foregroundColor(Color("ColorBrown"))
+                        .fontWeight(.heavy)
+                        .font(.system(size: 40))
                     ButtonView(destinationView: GameView(), buttonName: "Play game")
                     ButtonView(destinationView: Leaderboard(), buttonName: "Leaderboard")
                     ButtonView(destinationView: HowToPlay(), buttonName: "How to play")

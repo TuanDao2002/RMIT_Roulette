@@ -24,7 +24,7 @@ struct ButtonView<Content: View>: View {
                 self.isLinkActive = true
             }) {
                 Text(buttonName)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 500)
             }
             .modifier(ButtonModifier())
         }

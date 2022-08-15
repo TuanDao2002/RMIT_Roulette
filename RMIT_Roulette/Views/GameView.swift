@@ -9,7 +9,7 @@ import SwiftUI
 enum ColorRoulette: String {
     case red = "RED"
     case black = "BLACK"
-    case green = "ZERO"
+    case green = "GREEN"
     case empty
 }
 struct Sector: Equatable {
@@ -70,28 +70,49 @@ struct GameView: View {
             return deg
         }
         
-        func sectorFromAngle(angle: Double) -> String {
+        func sectorFromAngle(angle: Double) -> some View {
             var i = 0
-            var sector: Sector = Sector(number: -1, color: .empty)
+            var sector: Sector = Sector(number: 0, color: .green)
             
-            while sector == Sector(number: -1, color: .empty) && i < sectors.count {
+            while sector == Sector(number: 0, color: .green) && i < sectors.count {
                 let start: Double = halfSector * Double((i*2 + 1)) - halfSector
                 let end: Double = halfSector * Double((i*2 + 3))
                 
-                if(angle >= start && angle < end) {
+                if(angle > start && angle < end) {
                     sector = sectors[i]
                 }
                 i+=1
             }
-            return "Sector\n\(sector.number) \(sector.color.rawValue)"
+            
+            let numberValue = Text("\(sector.number) ").foregroundColor(.white).fontWeight(.bold)
+            let fontColor: Color
+            if (sector.color.rawValue == "RED") {
+                fontColor = .red
+            } else if (sector.color.rawValue == "BLACK"){
+                fontColor = .black
+            } else {
+                fontColor = .green
+            }
+            
+            let colorValue = Text(sector.color.rawValue).foregroundColor(fontColor).fontWeight(.bold)
+            
+            return numberValue + colorValue
+        }
+    
+        func spinningText() -> some View {
+            return Text("Spining...").fontWeight(.bold)
         }
         
         var body: some View {
             ZStack {
                 Color("ColorGreen").edgesIgnoringSafeArea(.all)
                 VStack {
-                    Text(self.isAnimating ? "Spining\n..." : sectorFromAngle(angle : newAngle))
-                        .multilineTextAlignment(.center)
+                    if (self.isAnimating) {
+                        spinningText()
+                    } else {
+                        sectorFromAngle(angle: newAngle)
+                    }
+                    
                     Image("red_arrow")
                         .resizable()
                         .scaledToFit()
@@ -101,7 +122,7 @@ struct GameView: View {
                         .scaledToFit()
                         .rotationEffect(Angle(degrees: spinDegrees))
                         .frame(width: 245, height: 245, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    Button("SPIN") {
+                    Button(action: {
                         isAnimating = true
                         rand = Double.random(in: 1...360)
     //                    spinDegrees += 720.0 + rand
@@ -111,7 +132,12 @@ struct GameView: View {
                         newAngle = getAngle(angle: spinDegrees)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
                             isAnimating = false
+
                         }
+                        
+                    }) {
+                        Text("SPIN")
+                            .frame(maxWidth: 500)
                     }
                     .modifier(ButtonModifier())
                     .padding(40)
@@ -124,5 +150,6 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView()
+            .previewInterfaceOrientation(.portrait)
     }
 }
