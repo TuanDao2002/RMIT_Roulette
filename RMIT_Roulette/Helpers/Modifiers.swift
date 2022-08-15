@@ -7,14 +7,23 @@
 
 import SwiftUI
 
-struct Modifiers: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct GrowingButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .padding()
+                .background(Color("ColorYellow"))
+                .foregroundColor(.black)
+                .clipShape(Capsule())
+                .scaleEffect(configuration.isPressed ? 1.05 : 1)
+                .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+        }
 }
 
-struct Modifiers_Previews: PreviewProvider {
-    static var previews: some View {
-        Modifiers()
-    }
+struct ButtonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+          .font(.title)
+          .padding()
+          .buttonStyle(GrowingButton())
+      }
 }

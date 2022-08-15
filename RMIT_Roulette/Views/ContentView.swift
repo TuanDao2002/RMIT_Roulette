@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isLinkActive = false
+    
     var body: some View {
-        Color("ColorGreen")
-            .ignoresSafeArea()
-            .overlay(
-                Image("roulette_wheel")
-            )
+        NavigationView {
+            ZStack {
+                Color("ColorGreen").edgesIgnoringSafeArea(.all)
+                VStack {
+                    ButtonView(destinationView: GameView(), buttonName: "Play game")
+                    ButtonView(destinationView: Leaderboard(), buttonName: "Leaderboard")
+                    ButtonView(destinationView: HowToPlay(), buttonName: "How to play")
+                }
+            }
+        }
     }
 }
 
