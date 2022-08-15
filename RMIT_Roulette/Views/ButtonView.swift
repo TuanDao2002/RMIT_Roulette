@@ -16,7 +16,7 @@ struct ButtonView<Content: View>: View {
         self.buttonName = buttonName
     }
     
-    @State var isLinkActive = false
+    @State private var isLinkActive = false
 
     var body: some View {
         NavigationLink(destination: destinationView, isActive: $isLinkActive) {
