@@ -13,7 +13,7 @@ enum ColorRoulette: String {
     case empty
 }
 struct Sector: Equatable, Hashable {
-    let number: Int
+    var number: Int
     let color: ColorRoulette
 }
 
@@ -26,6 +26,15 @@ struct GameView: View {
     @State private var showInput = false
     @State private var numberValue: Int = 0
     @State private var colorValue: ColorRoulette = .green
+    
+    @State private var sectorsToBet: [Sector] = []
+    @AppStorage("level") var level: String = "Easy"
+    
+    @State private var showingAlert = false
+    @State private var alertContent = ""
+    
+    @State private var yourMoney = 1000
+    @State private var highScore = 0
 
     let halfSector = 360.0 / 37.0 / 2.0
     let sectors: [Sector] = [Sector(number: 32, color: .red),
@@ -118,7 +127,7 @@ struct GameView: View {
                             .font(.system(size: 25))
         
         let colorValue = Text(sector.color.rawValue)
-                            .foregroundColor(returnColor(sector: sector))
+            .foregroundColor(returnColor(sector: sector))
                             .fontWeight(.bold)
                             .font(.system(size: 25))
 
@@ -140,7 +149,31 @@ struct GameView: View {
     var body: some View {
         ZStack {
             Color("ColorGreen").edgesIgnoringSafeArea(.all)
-            VStack {
+            VStack(spacing: 20) {
+                HStack(spacing: 50) {
+                    Text("High score: \(highScore)")
+                        .fontWeight(.bold)
+                        .padding()
+                        .background(Color("ColorYellow"))
+                        .clipShape(Capsule())
+                        .opacity(0.7)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color.white, lineWidth: 2)
+                        )
+                    
+                    Text("High score: \(highScore)")
+                        .fontWeight(.bold)
+                        .padding()
+                        .background(Color("ColorYellow"))
+                        .clipShape(Capsule())
+                        .opacity(0.7)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color.white, lineWidth: 2)
+                        )
+                }.padding(20)
+                
                 if (self.isAnimating) {
                     spinningText()
                 } else {
@@ -159,29 +192,75 @@ struct GameView: View {
                 
                 Button(action: {
                     showInput = true
+                    sectorsToBet = []
                 }) {
                     Text("SPIN")
                         .frame(maxWidth: 250)
                 }
                 .padding(0)
+                .disabled(isAnimating == true)
                 .modifier(ButtonModifier())
             }
         }.sheet(isPresented: $showInput) {
-            Text("Choose a value to bet")
-                .fontWeight(.bold)
-            Image(systemName: "0.circle.fill")
-                .font(.largeTitle)
-                .foregroundColor(.green)
-                .padding()
+            if (sectorsToBet.isEmpty) {
+                Text("Choose 3 values to bet")
+                    .font(.title)
+                    .fontWeight(.bold)
+            } else {
+                HStack {
+                    Text("You bet")
+                    ForEach(sectorsToBet, id: \.self) {sector in
+                        Button(action: {
+                            sectorsToBet = sectorsToBet.filter { $0 != sector }
+                        }) {
+                            Image(systemName: "\(sector.number).circle.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(returnColor(sector: sector))
+                        }
+                    }
+                }
+            }
+            
+            
+            Button(action: {
+                let greenSector = sectors[sectors.count - 1]
+                if (level == "Easy") {
+                    if (sectorsToBet.count < 3 && !sectorsToBet.contains(greenSector)) {
+                        sectorsToBet.append(greenSector)
+                    }
+                }
+            }) {
+                Image(systemName: "0.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(.green)
+                    .padding()
+            }
+           
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(displaySectors(sectors: sectors), id: \.self) { sector in
-                    Image(systemName: "\(sector.number).circle.fill")
-                        .font(.largeTitle)
-                        .foregroundColor(returnColor(sector: sector))
+                    Button(action: {
+                        if (level == "Easy") {
+                            if (sectorsToBet.count < 3 && !sectorsToBet.contains(sector)) {
+                                sectorsToBet.append(sector)
+                            }
+                        }
+                    }) {
+                        Image(systemName: "\(sector.number).circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(returnColor(sector: sector))
+                    }
                 }
             }
             
             Button(action: {
+                if (level == "Easy") {
+                    if (sectorsToBet.count < 3) {
+                        showingAlert = true
+                        alertContent = "You must bet 3 values"
+                        return
+                    }
+                }
+                
                 showInput = false
                 isAnimating = true
                 rand = Double.random(in: 1...360)
@@ -192,14 +271,15 @@ struct GameView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
                     isAnimating = false
                 }
-                
-            }) {
+            }){
                 Text("BET")
                     .frame(height: 50)
             }
+            .alert(alertContent, isPresented: $showingAlert) {
+                Button("OK", role: .cancel){}
+            }
             .modifier(ButtonModifier())
             .padding()
-            .disabled(isAnimating == true)
         }
     }
 }
