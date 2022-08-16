@@ -8,13 +8,37 @@
 import SwiftUI
 
 struct HowToPlay: View {
+    @Environment(\.dismiss) var dismiss
+    private var backToMenu = false
+
+    init(backToMenu: Bool) {
+        self.backToMenu = backToMenu
+    }
+    
     var body: some View {
-        Text("How to play")
+        ZStack {
+            Color("ColorGreen").edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("How to play")
+            }
+        }
+        
+        .overlay(
+            Button(action: {
+              dismiss()
+            }) {
+                Image(systemName: backToMenu ?  "house.circle" : "xmark.circle")
+                    .font(.largeTitle)
+            }
+            .foregroundColor(.black)
+            .padding(.top, 30)
+            .padding(.trailing, 20), alignment: .topTrailing
+        )
     }
 }
 
 struct HowToPlay_Previews: PreviewProvider {
     static var previews: some View {
-        HowToPlay()
+        HowToPlay(backToMenu: true)
     }
 }

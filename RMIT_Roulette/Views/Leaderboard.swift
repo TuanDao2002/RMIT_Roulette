@@ -8,13 +8,38 @@
 import SwiftUI
 
 struct Leaderboard: View {
-    var body: some View {
-        Text("Leaderboard")
+    @Environment(\.dismiss) var dismiss
+    private var backToMenu = false
+
+    init(backToMenu: Bool) {
+        self.backToMenu = backToMenu
     }
+
+    var body: some View {
+        ZStack {
+            Color("ColorGreen").edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("Leaderboard")
+            }
+        }
+        
+        .overlay(
+            Button(action: {
+              dismiss()
+            }) {
+                Image(systemName: "house.circle")
+                    .font(.largeTitle)
+            }
+            .foregroundColor(.black)
+            .padding(.top, 30)
+            .padding(.trailing, 20), alignment: .topTrailing
+        )
+    }
+
 }
 
 struct Leaderboard_Previews: PreviewProvider {
     static var previews: some View {
-        Leaderboard()
+        Leaderboard(backToMenu: true)
     }
 }

@@ -19,7 +19,7 @@ struct ButtonView<Content: View>: View {
     @State private var isLinkActive = false
 
     var body: some View {
-        NavigationLink(destination: destinationView, isActive: $isLinkActive) {
+        NavigationLink(destination: destinationView.navigationBarHidden(true), isActive: $isLinkActive) {
             Button(action: {
                 self.isLinkActive = true
             }) {

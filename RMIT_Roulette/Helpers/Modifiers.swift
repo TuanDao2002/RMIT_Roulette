@@ -52,3 +52,13 @@ struct StatusTextFieldModifier: ViewModifier {
             )
     }
 }
+
+struct IconModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .font(.system(size: 35))
+            .clipShape(Circle())
+            .opacity(0.7)
+    }
+}
