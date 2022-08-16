@@ -33,8 +33,8 @@ struct GameView: View {
     @State private var showingAlert = false
     @State private var alertContent = ""
     
-    @State private var yourMoney = 1000
-    @State private var highScore = 0
+    @State private var yourMoney: Int = 1000
+    @State private var highScore: Int = 0
 
     let halfSector = 360.0 / 37.0 / 2.0
     let sectors: [Sector] = [Sector(number: 32, color: .red),
@@ -107,11 +107,11 @@ struct GameView: View {
         return fontColor
     }
     
-    func sectorFromAngle(angle: Double) -> some View {
+    func sectorFromAngle(angle: Double) -> Sector {
         var i = 0
-        var sector: Sector = Sector(number: 0, color: .green)
+        var sector: Sector = Sector(number: -1, color: .empty)
         
-        while sector == Sector(number: 0, color: .green) && i < sectors.count {
+        while sector == Sector(number: -1, color: .empty) && i < sectors.count {
             let start: Double = halfSector * Double((i*2 + 1)) - halfSector
             let end: Double = halfSector * Double((i*2 + 3))
             
@@ -119,6 +119,16 @@ struct GameView: View {
                 sector = sectors[i]
             }
             i+=1
+        }
+        
+        return sector
+    }
+    
+    func displayResultSector(angle: Double) -> some View {
+        var sector = sectorFromAngle(angle: angle)
+        
+        if (sector.number == -1 && sector.color == .empty) {
+            sector = sectors[sectors.count - 1]
         }
         
         let numberValue = Text("\(sector.number) ")
@@ -146,38 +156,54 @@ struct GameView: View {
         return customSector.sorted(by: {$0.number < $1.number})
     }
     
+    func checkWinning(newAngle: Double) {
+        var bonusMoney = 0
+        var bonuseScore = 0
+        
+        if (level == "Easy") {
+            bonusMoney = 100
+            bonuseScore = 10
+        }
+        
+        let resultSector = sectorFromAngle(angle: newAngle)
+        if (sectorsToBet.filter{$0.number == resultSector.number}.count > 0) {
+            yourMoney += bonusMoney
+            highScore += bonuseScore
+        } else {
+            yourMoney -= bonusMoney
+        }
+    }
+    
     var body: some View {
         ZStack {
             Color("ColorGreen").edgesIgnoringSafeArea(.all)
-            VStack(spacing: 20) {
-                HStack(spacing: 50) {
-                    Text("High score: \(highScore)")
-                        .fontWeight(.bold)
-                        .padding()
-                        .background(Color("ColorYellow"))
-                        .clipShape(Capsule())
-                        .opacity(0.7)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color.white, lineWidth: 2)
-                        )
+            VStack() {
+                Image("roulette_logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 1000, maxHeight: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                VStack {
+                    HStack {
+                        Text("Your money:")
+                            .fontWeight(.bold)
+                        Spacer()
+                        Text("\(yourMoney)")
+                            .fontWeight(.bold)
+                    }.modifier(StatusTextFieldModifier())
                     
-                    Text("High score: \(highScore)")
-                        .fontWeight(.bold)
-                        .padding()
-                        .background(Color("ColorYellow"))
-                        .clipShape(Capsule())
-                        .opacity(0.7)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color.white, lineWidth: 2)
-                        )
-                }.padding(20)
+                    HStack {
+                        Text("High score:")
+                            .fontWeight(.bold)
+                        Spacer()
+                        Text("\(highScore)")
+                            .fontWeight(.bold)
+                    }.modifier(StatusTextFieldModifier())
+                }
                 
                 if (self.isAnimating) {
                     spinningText()
                 } else {
-                    sectorFromAngle(angle: newAngle)
+                    displayResultSector(angle: newAngle)
                 }
                 
                 Image("red_arrow")
@@ -197,7 +223,6 @@ struct GameView: View {
                     Text("SPIN")
                         .frame(maxWidth: 250)
                 }
-                .padding(0)
                 .disabled(isAnimating == true)
                 .modifier(ButtonModifier())
             }
@@ -270,6 +295,7 @@ struct GameView: View {
                 newAngle = getAngle(angle: spinDegrees)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
                     isAnimating = false
+                    checkWinning(newAngle: newAngle)
                 }
             }){
                 Text("BET")

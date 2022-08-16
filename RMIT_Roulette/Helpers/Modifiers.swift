@@ -38,10 +38,17 @@ struct OvalTextFieldStyle: TextFieldStyle {
     }
 }
 
-struct TextFieldModifier: ViewModifier {
+struct StatusTextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .frame(maxWidth: 275)
-            .textFieldStyle(OvalTextFieldStyle())
+            .frame(maxWidth: 250)
+            .padding()
+            .background(Color("ColorYellow"))
+            .clipShape(Capsule())
+            .opacity(0.7)
+            .overlay(
+                RoundedRectangle(cornerRadius: 35)
+                    .stroke(Color.white, lineWidth: 2)
+            )
     }
 }
