@@ -15,13 +15,16 @@ struct ContentView: View {
             ZStack {
                 Color("ColorGreen").edgesIgnoringSafeArea(.all)
                 VStack {
-                    Image("roulette_wheel")
+                    Image("roulette_logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 900, minHeight: 215, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     Text("RMIT Roulette")
                         .foregroundColor(Color("ColorYellow"))
                         .fontWeight(.bold)
                         .font(.system(size: 40))
                     ButtonView(destinationView: GameView(), buttonName: "Play game")
-                    ButtonView(destinationView: Leaderboard(backToMenu: true), buttonName: "Leaderboard")
+                    ButtonView(destinationView: Leaderboard(), buttonName: "Leaderboard")
                     ButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play")
                 }
             }

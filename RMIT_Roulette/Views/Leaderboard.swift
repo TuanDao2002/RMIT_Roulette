@@ -9,30 +9,54 @@ import SwiftUI
 
 struct Leaderboard: View {
     @Environment(\.dismiss) var dismiss
-    private var backToMenu = false
-
-    init(backToMenu: Bool) {
-        self.backToMenu = backToMenu
-    }
 
     var body: some View {
         ZStack {
-            Color("ColorGreen").edgesIgnoringSafeArea(.all)
+            Color("ColorYellow").edgesIgnoringSafeArea(.all).opacity(0.5)
             VStack {
                 Text("Leaderboard")
             }
         }
         
         .overlay(
-            Button(action: {
-              dismiss()
-            }) {
-                Image(systemName: "house.circle")
-                    .font(.largeTitle)
+            HStack {
+                Spacer()
+                Button(action: {
+                  dismiss()
+                }) {
+                    VStack {
+                        Image(systemName: "house.circle")
+                            .font(.system(size: 40))
+                        Text("Home")
+                    }
+                }
+                Spacer()
+                Button(action: {
+                  dismiss()
+                }) {
+                    VStack {
+                        Image(systemName: "info.circle")
+                            .font(.system(size: 40))
+                        Text("Info")
+                    }
+                }
+                Spacer()
+                Button(action: {
+                  dismiss()
+                }) {
+                    VStack {
+                        Image(systemName: "gearshape")
+                            .font(.system(size: 40))
+                        Text("Setting")
+                    }
+                }
+                Spacer()
             }
-            .foregroundColor(.black)
-            .padding(.top, 30)
-            .padding(.trailing, 20), alignment: .topTrailing
+                .padding(.vertical, 5)
+                .background(.white)
+                .frame(maxHeight: 5)
+                .ignoresSafeArea(edges: .bottom)
+                .foregroundColor(.black), alignment: .bottom
         )
     }
 
@@ -40,6 +64,6 @@ struct Leaderboard: View {
 
 struct Leaderboard_Previews: PreviewProvider {
     static var previews: some View {
-        Leaderboard(backToMenu: true)
+        Leaderboard()
     }
 }

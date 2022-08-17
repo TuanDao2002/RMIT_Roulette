@@ -167,26 +167,37 @@ struct GameView: View {
     }
     
     func checkWinning(newAngle: Double) {
-//        var bonusMoney = 0
-//        var bonusScore = 0
-        
         statusAppear = true
-        
-        if (level == "Easy") {
-            bonusMoney = 1000
-            bonusScore = 10
-        }
-        
         let resultSector = sectorFromAngle(angle: newAngle)
-        if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
-//            yourMoney += bonusMoney
-//            highScore += bonusScore
-            bonusMoney = -bonusMoney
-            bonusScore = 0
+
+        if (level == "Easy") {
+            bonusMoney = 100
+            bonusScore = 10
+            if (sectorsToBet.filter{$0.number == resultSector.number}.count > 0) {
+                bonusMoney = bonusMoney * 10
+                bonusScore = 100
+            } else
+            
+            // the difference between result sector and bet sector is less than 5
+            if (sectorsToBet.filter{abs($0.number - resultSector.number) <= 5}.count > 0) {
+                bonusMoney = bonusMoney
+                bonusScore = 10
+            } else
+            
+            if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
+                bonusMoney = -bonusMoney
+                bonusScore = 0
+            }
         }
         
         yourMoney += bonusMoney
         highScore += bonusScore
+        
+        if (yourMoney <= 0) {
+            yourMoney = 0
+            showingAlert = true
+            alertContent = "You lost all your money"
+        }
     }
     
     var body: some View {
@@ -282,6 +293,16 @@ struct GameView: View {
                 .foregroundColor(Color("ColorYellow"))
             }.modifier(IconModifier()), alignment: .topTrailing
         )
+        
+        .alert(alertContent, isPresented: $showingAlert) {
+            Button("Back to home", role: .destructive) {
+                dismiss()
+            }
+            
+            Button("Try again", role: .cancel) {
+                yourMoney = 1000
+            }
+        }
         
         .sheet(isPresented: $showInfo) {
             HowToPlay(backToMenu: false)
@@ -391,7 +412,7 @@ struct GameView: View {
                   Image(systemName: "xmark.circle")
                     .font(.title)
                 }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("ColorYellow"))
                 .padding(.top, 30)
                 .padding(.trailing, 20), alignment: .topTrailing
             )

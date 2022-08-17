@@ -30,7 +30,7 @@ struct HowToPlay: View {
                 Image(systemName: backToMenu ?  "house.circle" : "xmark.circle")
                     .font(.largeTitle)
             }
-            .foregroundColor(.black)
+            .foregroundColor(Color("ColorYellow"))
             .padding(.top, 30)
             .padding(.trailing, 20), alignment: .topTrailing
         )
