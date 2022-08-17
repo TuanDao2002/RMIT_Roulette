@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct ButtonView<Content: View>: View {
     private var buttonName: String
@@ -21,6 +22,7 @@ struct ButtonView<Content: View>: View {
     var body: some View {
         NavigationLink(destination: destinationView.navigationBarHidden(true), isActive: $isLinkActive) {
             Button(action: {
+                AudioServicesPlaySystemSound(1306)
                 self.isLinkActive = true
             }) {
                 Text(buttonName)

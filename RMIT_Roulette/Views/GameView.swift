@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AudioToolbox
 enum ColorRoulette: String {
     case red = "RED"
     case black = "BLACK"
@@ -41,7 +42,7 @@ struct GameView: View {
     @State private var colorValue: ColorRoulette = .green
     
     @State private var sectorsToBet: [Sector] = []
-    @AppStorage("level") var level: String = "Medium"
+    @AppStorage("level") var level: String = "Hard"
     @State private var numOfSectorsToBet: Int = 0
     
     @State private var yourMoney: Int = 1000
@@ -104,7 +105,7 @@ struct GameView: View {
         ]
     
     var spinAnimation: Animation {
-        Animation.easeOut(duration: 3.0)
+        Animation.easeOut(duration: 5.0)
             .repeatCount(1, autoreverses: false)
     }
     
@@ -206,6 +207,7 @@ struct GameView: View {
     
     func displayEachSector(sector: Sector) -> some View {
         return Button(action: {
+            AudioServicesPlaySystemSound(1306)
             if (level == "Easy") {
                 if (sectorsToBet.count < 6 && !sectorsToBet.contains(sector)) {
                     sectorsToBet.append(sector)
@@ -237,26 +239,30 @@ struct GameView: View {
         
         if (sectorsToBet.filter{$0.number == resultSector.number}.count > 0) {
             resultStatus = .BW
+
+            if (level == "Hard") {
+                bonusMoney = bonusMoney * 2
+                bonusScore = bonusScore * 2
+            }
+            
             bonusMoney = bonusMoney
             bonusScore = bonusScore
-        }
-        
-        else if (level == "Easy" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
+            playSound(sound: "coin_big_win", type: "wav")
+        } else if (level == "Easy" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
             resultStatus = .SM
             bonusMoney = bonusMoney / 10
             bonusScore = bonusScore / 10
-        }
-        
-        else if (level == "Medium" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
+            playSound(sound: "coin_small_win", type: "wav")
+        } else if (level == "Medium" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
             resultStatus = .SM
             bonusMoney = bonusMoney / 5
             bonusScore = bonusScore / 5
-        }
-        
-        else if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
+            playSound(sound: "coin_small_win", type: "wav")
+        } else if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
             resultStatus = .LO
             bonusMoney = -bonusMoney / 10
             bonusScore = 0
+            playSound(sound: "coin_lose", type: "wav")
         }
         
         yourMoney += bonusMoney
@@ -273,11 +279,10 @@ struct GameView: View {
         ZStack {
             Color("ColorGreen").edgesIgnoringSafeArea(.all)
             VStack {
-                Spacer()
                 Image("roulette_logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: 900, minHeight: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: 900, alignment: .center)
                 VStack(spacing: 3) {
                     Text("\(resultStatus.rawValue)")
                         .font(.title)
@@ -348,6 +353,8 @@ struct GameView: View {
                     .frame(minWidth: 280, minHeight: 280, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 
                 Button(action: {
+                    AudioServicesPlaySystemSound(1306)
+
                     showInput = true
                     sectorsToBet = []
                     
@@ -369,7 +376,8 @@ struct GameView: View {
         }
         .overlay(
             Button(action: {
-              dismiss()
+                AudioServicesPlaySystemSound(1306)
+                dismiss()
             }) {
               Image(systemName: "house.circle")
                 .foregroundColor(Color("ColorYellow"))
@@ -377,6 +385,7 @@ struct GameView: View {
         )
         .overlay(
             Button(action: {
+                AudioServicesPlaySystemSound(1306)
                 self.showInfo = true
             }) {
               Image(systemName: "info.circle")
@@ -413,6 +422,7 @@ struct GameView: View {
                                 .fontWeight(.medium)
                             ForEach(sectorsToBet, id: \.self) {sector in
                                 Button(action: {
+                                    AudioServicesPlaySystemSound(1306)
                                     sectorsToBet = sectorsToBet.filter { $0 != sector }
                                 }) {
                                     Image(systemName: "\(sector.number).circle.fill")
@@ -435,11 +445,15 @@ struct GameView: View {
                     }
                                 
                     Button(action: {
+                        AudioServicesPlaySystemSound(1306)
+
                         if (sectorsToBet.count < numOfSectorsToBet) {
                             showingAlert = true
                             alertContent = "You must bet \(numOfSectorsToBet) values"
                             return
                         }
+                        
+                        playSound(sound: "roulette_spin", type: "mp3")
                         
                         showInput = false
                         isAnimating = true
@@ -448,7 +462,7 @@ struct GameView: View {
                             spinDegrees += 720.0 + rand
                         }
                         newAngle = getAngle(angle: spinDegrees)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4.9) {
                             isAnimating = false
                             checkWinning(newAngle: newAngle)
                         }
@@ -465,7 +479,8 @@ struct GameView: View {
             }
             .overlay(
                 Button(action: {
-                  showInput = false
+                    AudioServicesPlaySystemSound(1306)
+                    showInput = false
                 }) {
                   Image(systemName: "xmark.circle")
                     .font(.title)
