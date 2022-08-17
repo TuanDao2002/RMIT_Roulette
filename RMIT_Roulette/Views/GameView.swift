@@ -12,6 +12,13 @@ enum ColorRoulette: String {
     case green = "GREEN"
     case empty
 }
+
+enum ResultStatus: String {
+    case SM = "GOOD JOB 😇"
+    case BW = "NICE BET 🥳"
+    case LO = "UNLUCKY 😢"
+}
+
 struct Sector: Equatable, Hashable {
     var number: Int
     let color: ColorRoulette
@@ -34,7 +41,8 @@ struct GameView: View {
     @State private var colorValue: ColorRoulette = .green
     
     @State private var sectorsToBet: [Sector] = []
-    @AppStorage("level") var level: String = "Easy"
+    @AppStorage("level") var level: String = "Medium"
+    @State private var numOfSectorsToBet: Int = 0
     
     @State private var yourMoney: Int = 1000
     @State private var bonusMoney: Int = 0
@@ -44,6 +52,7 @@ struct GameView: View {
 //    @AppStorage("yourMoney") var yourMoney: Int = 1000
 //    @AppStorage("highScore") var highScore: Int = 0
 
+    @State private var resultStatus: ResultStatus = .SM
     @State private var statusAppear = false
     
     let halfSector = 360.0 / 37.0 / 2.0
@@ -160,34 +169,94 @@ struct GameView: View {
                     .font(.system(size: 25))
     }
     
+    func displayBetInstruction() -> some View {
+        let inputText = Text("Choose \(numOfSectorsToBet) values to bet")
+            .foregroundColor(Color("ColorYellow"))
+            .font(.title)
+            .fontWeight(.medium)
+        
+        var instructionText = Text("")
+        if (level == "Easy" || level == "Medium") {
+            instructionText = Text("You can win if the result value is next to the value you choose")
+                .foregroundColor(Color("ColorYellow"))
+                .font(.title3)
+                .fontWeight(.medium)
+        }
+        
+        if (level == "Hard") {
+            instructionText = Text("You can only win if the result value is 1 of 2 values you choose")
+                .foregroundColor(Color("ColorYellow"))
+                .font(.title3)
+                .fontWeight(.medium)
+        }
+        
+        return VStack(alignment: .center) {
+            inputText
+            instructionText
+        }
+        .multilineTextAlignment(.center)
+        .padding()
+    }
+    
     func displaySectors(sectors: [Sector]) -> [Sector] {
         var customSector = sectors
         customSector.removeLast()
         return customSector.sorted(by: {$0.number < $1.number})
     }
     
+    func displayEachSector(sector: Sector) -> some View {
+        return Button(action: {
+            if (level == "Easy") {
+                if (sectorsToBet.count < 6 && !sectorsToBet.contains(sector)) {
+                    sectorsToBet.append(sector)
+                }
+            } else if (level == "Medium") {
+                if (sectorsToBet.count < 4 && !sectorsToBet.contains(sector)) {
+                    sectorsToBet.append(sector)
+                }
+            } else if (level == "Hard") {
+                if (sectorsToBet.count < 2 && !sectorsToBet.contains(sector)) {
+                    sectorsToBet.append(sector)
+                }
+            }
+        }) {
+            Image(systemName: "\(sector.number).circle.fill")
+                .font(.largeTitle)
+                .foregroundColor(returnColor(sector: sector))
+                .background(.white)
+                .cornerRadius(200)
+        }
+    }
+    
     func checkWinning(newAngle: Double) {
         statusAppear = true
         let resultSector = sectorFromAngle(angle: newAngle)
 
-        if (level == "Easy") {
-            bonusMoney = 100
-            bonusScore = 10
-            if (sectorsToBet.filter{$0.number == resultSector.number}.count > 0) {
-                bonusMoney = bonusMoney * 10
-                bonusScore = 100
-            } else
-            
-            // the difference between result sector and bet sector is less than 5
-            if (sectorsToBet.filter{abs($0.number - resultSector.number) <= 5}.count > 0) {
-                bonusMoney = bonusMoney
-                bonusScore = 10
-            } else
-            
-            if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
-                bonusMoney = -bonusMoney
-                bonusScore = 0
-            }
+        bonusMoney = 1000
+        bonusScore = 100
+        
+        if (sectorsToBet.filter{$0.number == resultSector.number}.count > 0) {
+            resultStatus = .BW
+            bonusMoney = bonusMoney
+            bonusScore = bonusScore
+        }
+        
+        else if (level == "Easy" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
+            resultStatus = .SM
+            bonusMoney = bonusMoney / 10
+            bonusScore = bonusScore / 10
+        }
+        
+        else if (level == "Medium" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
+            resultStatus = .SM
+            bonusMoney = bonusMoney / 5
+            bonusScore = bonusScore / 5
+        }
+        
+        else if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
+            resultStatus = .LO
+            bonusMoney = -bonusMoney / 10
+            bonusScore = 0
         }
         
         yourMoney += bonusMoney
@@ -208,15 +277,28 @@ struct GameView: View {
                 Image("roulette_logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: 900, minHeight: 215, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                VStack(spacing: 5) {
+                    .frame(maxWidth: 900, minHeight: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                VStack(spacing: 3) {
+                    Text("\(resultStatus.rawValue)")
+                        .font(.title)
+                        .foregroundColor(bonusMoney > 0 ? .green : .red)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .opacity(statusAppear ? 1 : 0)
+                        .onChange(of: statusAppear) {newValue in
+                            withAnimation(Animation.easeInOut(duration: 5)) {
+                                statusAppear = false
+                            }
+                        }
+                        .multilineTextAlignment(.center)
+                    
                     Text(bonusMoney > 0 ? "+\(bonusMoney)" : "\(bonusMoney)")
                         .foregroundColor(bonusMoney > 0 ? .green : .red)
                         .fontWeight(.bold)
                         .frame(maxWidth: 250, alignment: .trailing)
                         .opacity(statusAppear ? 1 : 0)
                         .onChange(of: statusAppear) {newValue in
-                            withAnimation(Animation.easeInOut(duration: 3)) {
+                            withAnimation(Animation.easeInOut(duration: 5)) {
                                 statusAppear = false
                             }
                         }
@@ -235,7 +317,7 @@ struct GameView: View {
                         .frame(maxWidth: 250, alignment: .trailing)
                         .opacity(bonusScore > 0 && statusAppear ? 1 : 0)
                         .onChange(of: statusAppear) {newValue in
-                            withAnimation(Animation.easeInOut(duration: 2)) {
+                            withAnimation(Animation.easeInOut(duration: 5)) {
                                 statusAppear = false
                             }
                         }
@@ -268,6 +350,14 @@ struct GameView: View {
                 Button(action: {
                     showInput = true
                     sectorsToBet = []
+                    
+                    if (level == "Easy") {
+                        numOfSectorsToBet = 6
+                    } else if (level == "Medium") {
+                        numOfSectorsToBet = 4
+                    } else if (level == "Hard") {
+                        numOfSectorsToBet = 2
+                    }
                 }) {
                     Text("SPIN")
                         .fontWeight(.medium)
@@ -314,10 +404,7 @@ struct GameView: View {
                 VStack(spacing: 40) {
                     Spacer()
                     if (sectorsToBet.isEmpty) {
-                        Text("Choose 3 values to bet")
-                            .foregroundColor(Color("ColorYellow"))
-                            .font(.title)
-                            .fontWeight(.medium)
+                        displayBetInstruction()
                     } else {
                         HStack {
                             Text("You bet")
@@ -335,59 +422,30 @@ struct GameView: View {
                                         .cornerRadius(200)
                                 }
                             }
-                        }
+                        }.padding()
                     }
                     
                     VStack {
-                        Button(action: {
-                            let greenSector = sectors[sectors.count - 1]
-                            if (level == "Easy") {
-                                if (sectorsToBet.count < 3 && !sectorsToBet.contains(greenSector)) {
-                                    sectorsToBet.append(greenSector)
-                                }
-                            }
-                        }) {
-                            Image(systemName: "0.circle.fill")
-                                .font(.largeTitle)
-                                .foregroundColor(.green)
-                                .background(.white)
-                                .cornerRadius(200)
-                                .padding()
-                        }
-                       
+                        displayEachSector(sector: sectors[sectors.count - 1])
                         LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(displaySectors(sectors: sectors), id: \.self) { sector in
-                                Button(action: {
-                                    if (level == "Easy") {
-                                        if (sectorsToBet.count < 3 && !sectorsToBet.contains(sector)) {
-                                            sectorsToBet.append(sector)
-                                        }
-                                    }
-                                }) {
-                                    Image(systemName: "\(sector.number).circle.fill")
-                                        .font(.largeTitle)
-                                        .foregroundColor(returnColor(sector: sector))
-                                        .background(.white)
-                                        .cornerRadius(200)
-                                }
+                                displayEachSector(sector: sector)
                             }
                         }
                     }
                                 
                     Button(action: {
-                        if (level == "Easy") {
-                            if (sectorsToBet.count < 3) {
-                                showingAlert = true
-                                alertContent = "You must bet 3 values"
-                                return
-                            }
+                        if (sectorsToBet.count < numOfSectorsToBet) {
+                            showingAlert = true
+                            alertContent = "You must bet \(numOfSectorsToBet) values"
+                            return
                         }
                         
                         showInput = false
                         isAnimating = true
                         rand = Double.random(in: 1...360)
                         withAnimation(spinAnimation) {
-                            spinDegrees += 720.0 + 0
+                            spinDegrees += 720.0 + rand
                         }
                         newAngle = getAngle(angle: spinDegrees)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
@@ -423,6 +481,5 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView()
-            .previewInterfaceOrientation(.portrait)
     }
 }
