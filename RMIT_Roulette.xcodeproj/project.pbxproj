@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4420AC628AE0301001EA456 /* background_music_menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4420AC528AE0301001EA456 /* background_music_menu.mp3 */; };
 		A49E0E0428A9FC85004BB2E1 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E0E0328A9FC85004BB2E1 /* GameView.swift */; };
 		A49E0E0628A9FCE0004BB2E1 /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E0E0528A9FCE0004BB2E1 /* Leaderboard.swift */; };
 		A49E0E0828A9FCF9004BB2E1 /* HowToPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E0E0728A9FCF9004BB2E1 /* HowToPlay.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A4420AC528AE0301001EA456 /* background_music_menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = background_music_menu.mp3; path = ../../../images/background_music_menu.mp3; sourceTree = "<group>"; };
 		A49E0E0328A9FC85004BB2E1 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		A49E0E0528A9FCE0004BB2E1 /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		A49E0E0728A9FCF9004BB2E1 /* HowToPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlay.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		A4D8A2BF28A94C4900DEEF3A /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				A4420AC528AE0301001EA456 /* background_music_menu.mp3 */,
 				A4A43D4528AD3DA00051D51A /* roulette_spin.mp3 */,
 				A4A43D4328AD3A810051D51A /* coin_lose.wav */,
 				A4A43D4128AD387B0051D51A /* coin_small_win.wav */,
@@ -182,6 +185,7 @@
 				A4A43D4228AD387B0051D51A /* coin_small_win.wav in Resources */,
 				A4A43D4428AD3A810051D51A /* coin_lose.wav in Resources */,
 				A4A43D4628AD3DA00051D51A /* roulette_spin.mp3 in Resources */,
+				A4420AC628AE0301001EA456 /* background_music_menu.mp3 in Resources */,
 				A4D8A2B728A942E600DEEF3A /* Preview Assets.xcassets in Resources */,
 				A4A43D4028AD35B90051D51A /* coin_big_win.wav in Resources */,
 				A4D8A2B428A942E600DEEF3A /* Assets.xcassets in Resources */,
