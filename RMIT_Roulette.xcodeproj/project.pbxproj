@@ -17,6 +17,7 @@
 		A4A43D4228AD387B0051D51A /* coin_small_win.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A43D4128AD387B0051D51A /* coin_small_win.wav */; };
 		A4A43D4428AD3A810051D51A /* coin_lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A43D4328AD3A810051D51A /* coin_lose.wav */; };
 		A4A43D4628AD3DA00051D51A /* roulette_spin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4A43D4528AD3DA00051D51A /* roulette_spin.mp3 */; };
+		A4C5825128AE96F0008B184B /* game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4C5825028AE96F0008B184B /* game_over.wav */; };
 		A4D8A2B028A942E200DEEF3A /* RMIT_RouletteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2AF28A942E200DEEF3A /* RMIT_RouletteApp.swift */; };
 		A4D8A2B228A942E200DEEF3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2B128A942E200DEEF3A /* ContentView.swift */; };
 		A4D8A2B428A942E600DEEF3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4D8A2B328A942E600DEEF3A /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		A4A43D4128AD387B0051D51A /* coin_small_win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = coin_small_win.wav; path = ../../../images/coin_small_win.wav; sourceTree = "<group>"; };
 		A4A43D4328AD3A810051D51A /* coin_lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = coin_lose.wav; path = ../../../images/coin_lose.wav; sourceTree = "<group>"; };
 		A4A43D4528AD3DA00051D51A /* roulette_spin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = roulette_spin.mp3; path = ../../../images/roulette_spin.mp3; sourceTree = "<group>"; };
+		A4C5825028AE96F0008B184B /* game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = game_over.wav; path = ../../../images/game_over.wav; sourceTree = "<group>"; };
 		A4D8A2AC28A942E200DEEF3A /* RMIT_Roulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMIT_Roulette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4D8A2AF28A942E200DEEF3A /* RMIT_RouletteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMIT_RouletteApp.swift; sourceTree = "<group>"; };
 		A4D8A2B128A942E200DEEF3A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		A4D8A2BF28A94C4900DEEF3A /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				A4C5825028AE96F0008B184B /* game_over.wav */,
 				A4420AC928AE1AC6001EA456 /* background_music_casino.mp3 */,
 				A4420AC528AE0301001EA456 /* background_music_menu.mp3 */,
 				A4A43D4528AD3DA00051D51A /* roulette_spin.mp3 */,
@@ -187,6 +190,7 @@
 			files = (
 				A4A43D4228AD387B0051D51A /* coin_small_win.wav in Resources */,
 				A4A43D4428AD3A810051D51A /* coin_lose.wav in Resources */,
+				A4C5825128AE96F0008B184B /* game_over.wav in Resources */,
 				A4A43D4628AD3DA00051D51A /* roulette_spin.mp3 in Resources */,
 				A4420AC628AE0301001EA456 /* background_music_menu.mp3 in Resources */,
 				A4D8A2B728A942E600DEEF3A /* Preview Assets.xcassets in Resources */,

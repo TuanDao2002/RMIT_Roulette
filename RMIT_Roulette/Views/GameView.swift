@@ -275,7 +275,7 @@ struct GameView: View {
             playSound(sound: "coin_small_win", type: "wav", loop: false)
         } else if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
             resultStatus = .LO
-            bonusMoney = -bonusMoney / 10
+            bonusMoney = -bonusMoney / 1
             bonusScore = 0
             playSound(sound: "coin_lose", type: "wav", loop: false)
         }
@@ -287,6 +287,8 @@ struct GameView: View {
             yourMoney = 0
             showingAlert = true
             alertContent = "You lost all your money"
+            emptySound()
+            playSound(sound: "game_over", type: "wav", loop: false)
         }
     }
     
@@ -423,17 +425,23 @@ struct GameView: View {
                 }
             } else if newPhase == .inactive || newPhase == .background {
                 atGameView = false
+                isAnimating = false
+                newAngle = 0
+                spinDegrees = 0
+                currentWorkItem.cancel()
                 emptySound()
             }
         }
         
         .alert(alertContent, isPresented: $showingAlert) {
             Button("Back to home", role: .destructive) {
+                playSound(sound: "background_music_menu", type: "mp3", loop: true)
                 dismiss()
             }
             
             Button("Try again", role: .cancel) {
                 yourMoney = 1000
+                playSound(sound: "background_music_casino", type: "mp3", loop: true)
             }
         }
         

@@ -24,7 +24,7 @@ func playSound(sound: String, type: String, loop: Bool) {
             } else {
                 arrayOfPlayers.append(audioPlayer!)
             }
-            audioPlayer?.setVolume(0.1, fadeDuration: 0.5)
+            audioPlayer?.setVolume(0.2, fadeDuration: 0.5)
             arrayOfPlayers.last?.prepareToPlay()
             arrayOfPlayers.last?.play()
             return
