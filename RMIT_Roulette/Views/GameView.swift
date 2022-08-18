@@ -59,6 +59,18 @@ struct GameView: View {
     @State private var resultStatus: ResultStatus = .SM
     @State private var statusAppear = false
     
+    @State private var currentWorkItem: DispatchWorkItem = DispatchWorkItem {}
+    private func workItem() -> DispatchWorkItem {
+        return DispatchWorkItem {
+            isAnimating = false
+            checkWinning(newAngle: newAngle)
+        }
+    }
+    
+    init() {
+        self.currentWorkItem = workItem()
+    }
+    
     let halfSector = 360.0 / 37.0 / 2.0
     let sectors: [Sector] = [Sector(number: 32, color: .red),
                              Sector(number: 15, color: .black),
@@ -278,6 +290,14 @@ struct GameView: View {
         }
     }
     
+    
+//    private func returnWorkItem() -> DispatchWorkItem {
+//        return DispatchWorkItem {
+//            isAnimating = false
+//            checkWinning(newAngle: newAngle)
+//        }
+//    }
+    
     var body: some View {
         ZStack {
             Color("ColorGreen").edgesIgnoringSafeArea(.all)
@@ -382,6 +402,7 @@ struct GameView: View {
                 AudioServicesPlaySystemSound(1306)
                 emptySound()
                 playSound(sound: "background_music_menu", type: "mp3", loop: true)
+                currentWorkItem.cancel()
                 dismiss()
             }) {
               Image(systemName: "house.circle")
@@ -483,10 +504,9 @@ struct GameView: View {
                             spinDegrees += 720.0 + rand
                         }
                         newAngle = getAngle(angle: spinDegrees)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 4.9) {
-                            isAnimating = false
-                            checkWinning(newAngle: newAngle)
-                        }
+                        
+                        currentWorkItem = workItem()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4.9, execute: currentWorkItem)
                     }){
                         Text("BET")
                             .fontWeight(.medium)
@@ -518,6 +538,5 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView()
-            .preferredColorScheme(.light)
     }
 }
