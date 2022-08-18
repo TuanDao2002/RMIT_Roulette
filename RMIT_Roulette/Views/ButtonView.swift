@@ -22,6 +22,7 @@ struct ButtonView<Content: View>: View {
     var body: some View {
         NavigationLink(destination: destinationView.navigationBarHidden(true), isActive: $isLinkActive) {
             Button(action: {
+                audioPlayer?.stop()
                 AudioServicesPlaySystemSound(1306)
                 self.isLinkActive = true
             }) {

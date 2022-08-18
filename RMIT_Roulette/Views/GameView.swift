@@ -42,7 +42,7 @@ struct GameView: View {
     @State private var colorValue: ColorRoulette = .green
     
     @State private var sectorsToBet: [Sector] = []
-    @AppStorage("level") var level: String = "Hard"
+    @AppStorage("level") var level: String = "Medium"
     @State private var numOfSectorsToBet: Int = 0
     
     @State private var yourMoney: Int = 1000
@@ -247,22 +247,22 @@ struct GameView: View {
             
             bonusMoney = bonusMoney
             bonusScore = bonusScore
-            playSound(sound: "coin_big_win", type: "wav")
+            playSound(sound: "coin_big_win", type: "wav", loop: false)
         } else if (level == "Easy" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
             resultStatus = .SM
             bonusMoney = bonusMoney / 10
             bonusScore = bonusScore / 10
-            playSound(sound: "coin_small_win", type: "wav")
+            playSound(sound: "coin_small_win", type: "wav", loop: false)
         } else if (level == "Medium" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
             resultStatus = .SM
             bonusMoney = bonusMoney / 5
             bonusScore = bonusScore / 5
-            playSound(sound: "coin_small_win", type: "wav")
+            playSound(sound: "coin_small_win", type: "wav", loop: false)
         } else if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
             resultStatus = .LO
             bonusMoney = -bonusMoney / 10
             bonusScore = 0
-            playSound(sound: "coin_lose", type: "wav")
+            playSound(sound: "coin_lose", type: "wav", loop: false)
         }
         
         yourMoney += bonusMoney
@@ -377,6 +377,7 @@ struct GameView: View {
         .overlay(
             Button(action: {
                 AudioServicesPlaySystemSound(1306)
+                playSound(sound: "background_music_menu", type: "mp3", loop: true)
                 dismiss()
             }) {
               Image(systemName: "house.circle")
@@ -453,7 +454,7 @@ struct GameView: View {
                             return
                         }
                         
-                        playSound(sound: "roulette_spin", type: "mp3")
+                        playSound(sound: "roulette_spin", type: "mp3", loop: false)
                         
                         showInput = false
                         isAnimating = true
@@ -468,6 +469,7 @@ struct GameView: View {
                         }
                     }){
                         Text("BET")
+                            .fontWeight(.medium)
                             .frame(height: 50)
                     }
                     .alert(alertContent, isPresented: $showingAlert) {

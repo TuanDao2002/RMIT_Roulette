@@ -24,7 +24,11 @@ struct ContentView: View {
                     ButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play")
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .onAppear(perform: {
+            playSound(sound: "background_music_menu", type: "mp3", loop: true)
+        })
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

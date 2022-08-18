@@ -24,6 +24,7 @@ struct ButtonModifier: ViewModifier {
         content
             .font(.title)
             .padding()
+            .shadow(radius: 5)
             .buttonStyle(GrowingButton())
     }
 }
