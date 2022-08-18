@@ -25,6 +25,9 @@ func playSound(sound: String, type: String, loop: Bool) {
                 arrayOfPlayers.append(audioPlayer!)
             }
             audioPlayer?.setVolume(0.1, fadeDuration: 0.5)
+            arrayOfPlayers.last?.prepareToPlay()
+            arrayOfPlayers.last?.play()
+            return
         }
         
         try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)

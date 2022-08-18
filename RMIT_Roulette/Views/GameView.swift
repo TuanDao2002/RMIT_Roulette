@@ -29,6 +29,8 @@ struct GameView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.dismiss) var dismiss
     
+    @State private var atGameView = true
+    
     @State private var isAnimating = false
     @State private var spinDegrees = 0.0
     @State private var rand = 0.0
@@ -399,15 +401,15 @@ struct GameView: View {
         .onAppear(perform: {
             playSound(sound: "background_music_casino", type: "mp3", loop: true)
         })
-//
-//        .onDisappear(perform: {
-//            emptySound()
-//        })
         
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
-                playSound(sound: "background_music_casino", type: "mp3", loop: true)
+                if (!atGameView) {
+                    playSound(sound: "background_music_casino", type: "mp3", loop: true)
+                    atGameView = true
+                }
             } else if newPhase == .inactive || newPhase == .background {
+                atGameView = false
                 emptySound()
             }
         }
