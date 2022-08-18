@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.scenePhase) var scenePhase
     @State var isLinkActive = false
     
     var body: some View {
@@ -28,6 +29,20 @@ struct ContentView: View {
         .onAppear(perform: {
             playSound(sound: "background_music_menu", type: "mp3", loop: true)
         })
+        .onDisappear(perform: {
+            emptySound()
+        })
+        
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                playSound(sound: "background_music_menu", type: "mp3", loop: true)
+            } else if newPhase == .inactive {
+                emptySound()
+            } else if newPhase == .background {
+                emptySound()
+            }
+        }
+        
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
@@ -35,5 +50,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.light)
     }
 }

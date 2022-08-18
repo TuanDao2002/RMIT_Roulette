@@ -26,6 +26,7 @@ struct Sector: Equatable, Hashable {
 }
 
 struct GameView: View {
+    @Environment(\.scenePhase) var scenePhase
     @Environment(\.dismiss) var dismiss
     
     @State private var isAnimating = false
@@ -377,6 +378,7 @@ struct GameView: View {
         .overlay(
             Button(action: {
                 AudioServicesPlaySystemSound(1306)
+                emptySound()
                 playSound(sound: "background_music_menu", type: "mp3", loop: true)
                 dismiss()
             }) {
@@ -393,6 +395,22 @@ struct GameView: View {
                 .foregroundColor(Color("ColorYellow"))
             }.modifier(IconModifier()), alignment: .topTrailing
         )
+        
+        .onAppear(perform: {
+            playSound(sound: "background_music_casino", type: "mp3", loop: true)
+        })
+//
+//        .onDisappear(perform: {
+//            emptySound()
+//        })
+        
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                playSound(sound: "background_music_casino", type: "mp3", loop: true)
+            } else if newPhase == .inactive || newPhase == .background {
+                emptySound()
+            }
+        }
         
         .alert(alertContent, isPresented: $showingAlert) {
             Button("Back to home", role: .destructive) {
@@ -498,5 +516,6 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView()
+            .preferredColorScheme(.light)
     }
 }
