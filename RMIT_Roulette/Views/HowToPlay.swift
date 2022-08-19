@@ -18,10 +18,83 @@ struct HowToPlay: View {
     var body: some View {
         ZStack {
             Color("ColorGreen").edgesIgnoringSafeArea(.all)
-            VStack {
-                Text("How to play")
+                VStack {
+                    Image("roulette_logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 400, maxHeight: 200, alignment: .center)
+                    Form {
+                        Section(header: Text("How To Play")
+                                            .font(.title)
+                                            .fontWeight(.bold)) {
+                            Text("1. Tap at the SPIN button")
+                            Text("2. Then a sheet appears and displays some values to bet")
+                            Text("3. Choose some values to bet")
+                            Text("4. Tap at the BET button")
+                            Text("5. The roulette wheel will spin and when it stops, it displays a result value")
+                            Text("6. If one of your bet values is matched with the result value, you will gain more money and score")
+                            Text("7. Otherwise, you will lose money, but your score still remains")
+                        }
+                        .listRowBackground(Color("ColorYellow"))
+                        
+                        Section(header: Text("Easy mode")
+                                            .font(.title)
+                                            .fontWeight(.bold)) {
+                            Text("In easy mode, you can bet 6 values")
+                            Text("You will win if one of them is matched with the result value, your money will increase by 1000 and high score increases by 100")
+                            Text("You can also win if one of them is next to the result value, your money will increase by 100 and high score increases by 10")
+                            Text("If none of them is matched with the result value, your money will decrease by 100 and your score will not increase")
+                        }
+                        .listRowBackground(Color("ColorYellow"))
+                        
+                        Section(header: Text("Medium mode")
+                                            .font(.title)
+                                            .fontWeight(.bold)) {
+                            Text("In medium mode, you can bet 4 values")
+                            Text("You will win if one of them is matched with the result value, your money will increase by 1000 and high score increases by 100")
+                            Text("You can also win if one of them is next to the result value, your money will increase by 200 and high score increases by 20")
+                            Text("If none of them is matched with the result value, your money will decrease by 100 and your score will not increase")
+                        }
+                        .listRowBackground(Color("ColorYellow"))
+                        
+                        Section(header: Text("Hard mode")
+                                            .font(.title)
+                                            .fontWeight(.bold)) {
+                            Text("In hard mode, you can bet 2 values")
+                            Text("You will win if one of them is matched with the result value, your money will increase by 2000 and high score increases by 200")
+                            Text("If none of them is matched with the result value, your money will decrease by 100 and your score will not increase")
+                        }
+                        .listRowBackground(Color("ColorYellow"))
+                    }
             }
         }
+        
+        .overlay(
+                HStack {
+                    Spacer()
+                    Button(action: {
+                      dismiss()
+                    }) {
+                        VStack {
+                            if (backToMenu) {
+                                Image(systemName: "house.circle")
+                                    .font(.system(size: 40))
+                                Text("Home")
+                            } else {
+                                Image(systemName: "xmark.circle")
+                                    .font(.system(size: 40))
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+                .padding(.vertical, 5)
+                .background(Color("ColorYellow"))
+                .frame(maxHeight: 5)
+                .ignoresSafeArea(edges: .bottom)
+                .opacity(backToMenu ? 1 : 0)
+                .foregroundColor(.black), alignment: .bottom
+        )
         
         .overlay(
             Button(action: {
@@ -32,6 +105,7 @@ struct HowToPlay: View {
             }
             .foregroundColor(Color("ColorYellow"))
             .padding(.top, 30)
+            .opacity(backToMenu ? 0 : 1)
             .padding(.trailing, 20), alignment: .topTrailing
         )
     }

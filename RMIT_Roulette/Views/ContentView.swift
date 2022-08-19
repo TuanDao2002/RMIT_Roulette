@@ -20,25 +20,20 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 900, minHeight: 215, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    ButtonView(destinationView: GameView(), buttonName: "Play game")
-                    ButtonView(destinationView: Leaderboard(), buttonName: "Leaderboard")
-                    ButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play")
+                    ButtonView(destinationView: GameView(), buttonName: "Play game", changeBackgroundMusic: true)
+                    ButtonView(destinationView: Leaderboard(), buttonName: "Leaderboard", changeBackgroundMusic: false)
+                    ButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play", changeBackgroundMusic: false)
                 }
             }
         }
         .onAppear(perform: {
             playSound(sound: "background_music_menu", type: "mp3", loop: true)
         })
-        .onDisappear(perform: {
-            emptySound()
-        })
         
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
                 playSound(sound: "background_music_menu", type: "mp3", loop: true)
-            } else if newPhase == .inactive {
-                emptySound()
-            } else if newPhase == .background {
+            } else if newPhase == .inactive || newPhase == .background {
                 emptySound()
             }
         }

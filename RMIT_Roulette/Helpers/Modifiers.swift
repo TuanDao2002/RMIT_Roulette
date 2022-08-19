@@ -63,3 +63,24 @@ struct IconModifier: ViewModifier {
             .opacity(0.7)
     }
 }
+
+struct AddBottomBarModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(.vertical, 5)
+            .background(Color("ColorYellow"))
+            .frame(maxHeight: 5)
+            .ignoresSafeArea(edges: .bottom)
+            .foregroundColor(.black)
+    }
+}
+
+struct addXMarkModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(.top, 30)
+            .foregroundColor(Color("ColorYellow"))
+            .padding(.trailing, 20)
+    }
+}
+

@@ -11,10 +11,12 @@ import AudioToolbox
 struct ButtonView<Content: View>: View {
     private var buttonName: String
     private var destinationView: Content
+    private var changeBackgroundMusic: Bool = false
 
-    init(destinationView: Content, buttonName: String) {
+    init(destinationView: Content, buttonName: String, changeBackgroundMusic: Bool) {
         self.destinationView = destinationView
         self.buttonName = buttonName
+        self.changeBackgroundMusic = changeBackgroundMusic
     }
     
     @State private var isLinkActive = false
@@ -23,7 +25,9 @@ struct ButtonView<Content: View>: View {
         NavigationLink(destination: destinationView.navigationBarHidden(true), isActive: $isLinkActive) {
             Button(action: {
                 AudioServicesPlaySystemSound(1306)
-                emptySound()
+                if (changeBackgroundMusic) {
+                    emptySound()
+                }
                 self.isLinkActive = true
             }) {
                 Text(buttonName)
@@ -36,6 +40,6 @@ struct ButtonView<Content: View>: View {
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(destinationView: GameView(), buttonName: "Play game")
+        ButtonView(destinationView: GameView(), buttonName: "Play game", changeBackgroundMusic: true)
     }
 }
