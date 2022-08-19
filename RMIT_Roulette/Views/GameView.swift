@@ -280,7 +280,7 @@ struct GameView: View {
             playSound(sound: "coin_small_win", type: "wav", loop: false)
         } else if (sectorsToBet.filter{$0.number == resultSector.number}.count == 0) {
             resultStatus = .LO
-            bonusMoney = -bonusMoney / 1
+            bonusMoney = -bonusMoney / 10
             bonusScore = 0
             playSound(sound: "coin_lose", type: "wav", loop: false)
         }
@@ -419,7 +419,7 @@ struct GameView: View {
         )
         
         .onAppear(perform: {
-//            playSound(sound: "background_music_casino", type: "mp3", loop: true)
+            playSound(sound: "background_music_casino", type: "mp3", loop: true)
         })
         
         .onChange(of: scenePhase) { newPhase in
