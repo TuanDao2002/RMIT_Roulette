@@ -180,9 +180,14 @@ struct GameView: View {
     }
 
     func spinningText() -> some View {
-        return Text("SPINING...")
-                    .fontWeight(.bold)
-                    .font(.system(size: 25))
+        return HStack {
+            Text("SPINING")
+                .fontWeight(.bold)
+                .font(.system(size: 25))
+            DotView()
+            DotView(delay: 0.2)
+            DotView(delay: 0.4)
+        }
     }
     
     func displayBetInstruction() -> some View {
@@ -414,7 +419,7 @@ struct GameView: View {
         )
         
         .onAppear(perform: {
-            playSound(sound: "background_music_casino", type: "mp3", loop: true)
+//            playSound(sound: "background_music_casino", type: "mp3", loop: true)
         })
         
         .onChange(of: scenePhase) { newPhase in

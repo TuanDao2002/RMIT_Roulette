@@ -75,10 +75,9 @@ struct AddBottomBarModifier: ViewModifier {
     }
 }
 
-struct addXMarkModifier: ViewModifier {
+struct AddXMarkModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .padding(.top, 30)
             .foregroundColor(Color("ColorYellow"))
             .padding(.trailing, 20)
     }

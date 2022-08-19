@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		A4420AC628AE0301001EA456 /* background_music_menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4420AC528AE0301001EA456 /* background_music_menu.mp3 */; };
 		A4420ACA28AE1AC6001EA456 /* background_music_casino.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4420AC928AE1AC6001EA456 /* background_music_casino.mp3 */; };
+		A482F06028AFD5F700828891 /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F05F28AFD5F700828891 /* DotView.swift */; };
+		A482F06228AFDA6200828891 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F06128AFDA6200828891 /* LeaderboardRow.swift */; };
+		A482F06528AFE2B400828891 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F06428AFE2B400828891 /* User.swift */; };
 		A49E0E0428A9FC85004BB2E1 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E0E0328A9FC85004BB2E1 /* GameView.swift */; };
 		A49E0E0628A9FCE0004BB2E1 /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E0E0528A9FCE0004BB2E1 /* Leaderboard.swift */; };
 		A49E0E0828A9FCF9004BB2E1 /* HowToPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E0E0728A9FCF9004BB2E1 /* HowToPlay.swift */; };
@@ -29,6 +32,9 @@
 /* Begin PBXFileReference section */
 		A4420AC528AE0301001EA456 /* background_music_menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = background_music_menu.mp3; path = ../../../images/background_music_menu.mp3; sourceTree = "<group>"; };
 		A4420AC928AE1AC6001EA456 /* background_music_casino.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = background_music_casino.mp3; path = ../../../images/background_music_casino.mp3; sourceTree = "<group>"; };
+		A482F05F28AFD5F700828891 /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
+		A482F06128AFDA6200828891 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
+		A482F06428AFE2B400828891 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A49E0E0328A9FC85004BB2E1 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		A49E0E0528A9FCE0004BB2E1 /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		A49E0E0728A9FCF9004BB2E1 /* HowToPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlay.swift; sourceTree = "<group>"; };
@@ -58,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A482F06328AFE2A300828891 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A482F06428AFE2B400828891 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A4D8A2A328A942E200DEEF3A = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +91,7 @@
 		A4D8A2AE28A942E200DEEF3A /* RMIT_Roulette */ = {
 			isa = PBXGroup;
 			children = (
+				A482F06328AFE2A300828891 /* Model */,
 				A4D8A2BF28A94C4900DEEF3A /* Sounds */,
 				A4D8A2BE28A94AE400DEEF3A /* Helpers */,
 				A4D8A2BD28A94ADB00DEEF3A /* Views */,
@@ -103,6 +118,8 @@
 				A49E0E0528A9FCE0004BB2E1 /* Leaderboard.swift */,
 				A49E0E0728A9FCF9004BB2E1 /* HowToPlay.swift */,
 				A49E0E0928A9FF0D004BB2E1 /* ButtonView.swift */,
+				A482F05F28AFD5F700828891 /* DotView.swift */,
+				A482F06128AFDA6200828891 /* LeaderboardRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,14 +224,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A482F06228AFDA6200828891 /* LeaderboardRow.swift in Sources */,
 				A4D8A2B228A942E200DEEF3A /* ContentView.swift in Sources */,
 				A49E0E0628A9FCE0004BB2E1 /* Leaderboard.swift in Sources */,
+				A482F06028AFD5F700828891 /* DotView.swift in Sources */,
 				A49E0E0A28A9FF0D004BB2E1 /* ButtonView.swift in Sources */,
 				A4D8A2C728A94D0400DEEF3A /* PlaySound.swift in Sources */,
 				A4D8A2C528A94CEE00DEEF3A /* Modifiers.swift in Sources */,
 				A4D8A2B028A942E200DEEF3A /* RMIT_RouletteApp.swift in Sources */,
 				A49E0E0428A9FC85004BB2E1 /* GameView.swift in Sources */,
 				A49E0E0828A9FCF9004BB2E1 /* HowToPlay.swift in Sources */,
+				A482F06528AFE2B400828891 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

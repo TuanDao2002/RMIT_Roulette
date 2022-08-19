@@ -10,11 +10,41 @@ import SwiftUI
 struct Leaderboard: View {
     @Environment(\.dismiss) var dismiss
 
+    private var users = [
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro"),
+        User(username: "tuan", highScore: 100, badge: "Pro")
+    ]
+    
     var body: some View {
         ZStack {
-            Color("ColorYellow").edgesIgnoringSafeArea(.all).opacity(0.5)
-            VStack {
-                Text("Leaderboard")
+            Color("ColorGreen").edgesIgnoringSafeArea(.all)
+            ScrollView {
+                VStack(spacing: 10) {
+                    Text("Leaderboard")
+                        .font(.system(size: 40))
+                        .fontWeight(.bold)
+                    
+                    ForEach(0..<users.count, id: \.self) { index in
+                        LeaderboardRow(user: users[index], rank: index + 99)
+                    }
+                }
+                .padding(.bottom, 45)
+                .padding()
             }
         }
         
@@ -31,32 +61,9 @@ struct Leaderboard: View {
                     }
                 }
                 Spacer()
-                Button(action: {
-                  dismiss()
-                }) {
-                    VStack {
-                        Image(systemName: "info.circle")
-                            .font(.system(size: 40))
-                        Text("Info")
-                    }
-                }
-                Spacer()
-                Button(action: {
-                  dismiss()
-                }) {
-                    VStack {
-                        Image(systemName: "gearshape")
-                            .font(.system(size: 40))
-                        Text("Setting")
-                    }
-                }
-                Spacer()
             }
-                .padding(.vertical, 5)
-                .background(.white)
-                .frame(maxHeight: 5)
-                .ignoresSafeArea(edges: .bottom)
-                .foregroundColor(.black), alignment: .bottom
+            .modifier(AddBottomBarModifier()),
+            alignment: .bottom
         )
     }
 

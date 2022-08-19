@@ -77,43 +77,34 @@ struct HowToPlay: View {
                       dismiss()
                     }) {
                         VStack {
-                            if (backToMenu) {
-                                Image(systemName: "house.circle")
-                                    .font(.system(size: 40))
-                                Text("Home")
-                            } else {
-                                Image(systemName: "xmark.circle")
-                                    .font(.system(size: 40))
-                            }
+                            Image(systemName: "house.circle")
+                                .font(.system(size: 40))
+                            Text("Home")
                         }
                     }
                     Spacer()
                 }
-                .padding(.vertical, 5)
-                .background(Color("ColorYellow"))
-                .frame(maxHeight: 5)
-                .ignoresSafeArea(edges: .bottom)
-                .opacity(backToMenu ? 1 : 0)
-                .foregroundColor(.black), alignment: .bottom
+                .modifier(AddBottomBarModifier())
+                .opacity(backToMenu ? 1 : 0),
+                alignment: .bottom
         )
         
         .overlay(
             Button(action: {
               dismiss()
             }) {
-                Image(systemName: backToMenu ?  "house.circle" : "xmark.circle")
+                Image(systemName: "xmark.circle")
                     .font(.largeTitle)
             }
-            .foregroundColor(Color("ColorYellow"))
-            .padding(.top, 30)
-            .opacity(backToMenu ? 0 : 1)
-            .padding(.trailing, 20), alignment: .topTrailing
+            .modifier(AddXMarkModifier())
+            .opacity(backToMenu ? 0 : 1),
+            alignment: .topTrailing
         )
     }
 }
 
 struct HowToPlay_Previews: PreviewProvider {
     static var previews: some View {
-        HowToPlay(backToMenu: false)
+        HowToPlay(backToMenu: true)
     }
 }
