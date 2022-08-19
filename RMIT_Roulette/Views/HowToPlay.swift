@@ -66,6 +66,7 @@ struct HowToPlay: View {
                         }
                         .listRowBackground(Color("ColorYellow"))
                     }
+                    .padding(.vertical, backToMenu ? 15 : 0)
             }
         }
         
@@ -113,6 +114,6 @@ struct HowToPlay: View {
 
 struct HowToPlay_Previews: PreviewProvider {
     static var previews: some View {
-        HowToPlay(backToMenu: true)
+        HowToPlay(backToMenu: false)
     }
 }

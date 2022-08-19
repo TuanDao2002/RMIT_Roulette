@@ -120,7 +120,7 @@ struct GameView: View {
         ]
     
     var spinAnimation: Animation {
-        Animation.easeOut(duration: 3.0)
+        Animation.easeOut(duration: 5.0)
             .repeatCount(1, autoreverses: false)
     }
     
@@ -506,7 +506,7 @@ struct GameView: View {
                         newAngle = getAngle(angle: spinDegrees)
                         
                         currentWorkItem = workItem()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.9, execute: currentWorkItem)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4.9, execute: currentWorkItem)
                     }){
                         Text("BET")
                             .fontWeight(.medium)
