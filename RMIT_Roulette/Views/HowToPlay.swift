@@ -66,8 +66,8 @@ struct HowToPlay: View {
                         }
                         .listRowBackground(Color("ColorYellow"))
                     }
-                    .padding(.vertical, backToMenu ? 15 : 0)
-            }
+                    .padding(.bottom, backToMenu ? UIDevice.current.userInterfaceIdiom == .phone ? 30 : 65 : 0)
+                }
         }
         
         .overlay(

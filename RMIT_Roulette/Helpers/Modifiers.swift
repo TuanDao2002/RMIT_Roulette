@@ -69,7 +69,7 @@ struct AddBottomBarModifier: ViewModifier {
         content
             .padding(.vertical, 5)
             .background(Color("ColorYellow"))
-            .frame(maxHeight: 5)
+            .frame(maxHeight: UIDevice.current.userInterfaceIdiom == .phone ? 30 : 65)
             .ignoresSafeArea(edges: .bottom)
             .foregroundColor(.black)
     }
@@ -79,6 +79,7 @@ struct AddXMarkModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color("ColorYellow"))
+            .padding(.top, 20)
             .padding(.trailing, 20)
     }
 }
