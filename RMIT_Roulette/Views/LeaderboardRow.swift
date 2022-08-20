@@ -13,19 +13,52 @@ struct LeaderboardRow: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            Text("\(rank)")
-                .frame(width: 40)
+            if (rank == 1) {
+                Image("1st_rank")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 65, height: 60)
+            } else if (rank == 2) {
+                Image("2nd_rank")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 65, height: 60)
+            } else if (rank == 3) {
+                Image("3rd_rank")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 65, height: 60)
+            } else {
+                Text("\(rank)")
+                    .font(.system(size: 40))
+                    .frame(width: 65)
+            }
             
             VStack(alignment: .leading) {
                 Text(user.username)
-                    .font(.title3)
+                    .font(.title)
                     .fontWeight(.medium)
                 Text("\(user.highScore)")
-                    .font(.title3)
+                    .font(.title2)
                     .fontWeight(.medium)
             }
             Spacer()
-            Text(user.badge)
+            if (user.highScore >= 10000) {
+                Image("legend_badge")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 65, height: 60)
+            } else if (user.highScore >= 5000) {
+                Image("master_badge")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 65, height: 60)
+            } else if (user.highScore >= 1000) {
+                Image("pro_badge")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 65, height: 60)
+            }
         }
         .padding()
         .frame(maxWidth: .infinity)
@@ -35,6 +68,6 @@ struct LeaderboardRow: View {
 
 struct LeaderboardRow_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardRow(user: User(username: "Tuan", highScore: 100, badge: "Pro"), rank: 100)
+        LeaderboardRow(user: User(username: "Tuan", highScore: 10000, badge: "Pro"), rank: 1)
     }
 }

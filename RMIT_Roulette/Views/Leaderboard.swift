@@ -6,28 +6,29 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct Leaderboard: View {
     @Environment(\.dismiss) var dismiss
 
     private var users = [
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro"),
-        User(username: "tuan", highScore: 100, badge: "Pro")
+        User(username: "tuan", highScore: Int.random(in: 1000..<99999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro"),
+        User(username: "tuan", highScore: Int.random(in: 1000..<9999), badge: "Pro")
     ]
     
     var body: some View {
@@ -40,7 +41,7 @@ struct Leaderboard: View {
                         .fontWeight(.bold)
                     
                     ForEach(0..<users.count, id: \.self) { index in
-                        LeaderboardRow(user: users[index], rank: index + 1)
+                        LeaderboardRow(user: users[index], rank: index < 10 ? index + 1 : index + 100)
                     }
                 }
                 .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 45 : 65)
@@ -52,7 +53,8 @@ struct Leaderboard: View {
             HStack {
                 Spacer()
                 Button(action: {
-                  dismiss()
+                    AudioServicesPlaySystemSound(1306)
+                    dismiss()
                 }) {
                     VStack {
                         Image(systemName: "house.circle")
