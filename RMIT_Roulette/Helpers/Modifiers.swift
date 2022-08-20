@@ -54,6 +54,17 @@ struct StatusTextFieldModifier: ViewModifier {
     }
 }
 
+struct ShowBonus: ViewModifier {
+    var bonus: Int
+    var statusAppear: Bool
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(bonus > 0 ? .green : .red)
+            .frame(maxWidth: 250, alignment: .trailing)
+            .opacity(statusAppear ? 1 : 0)
+    }
+}
+
 struct IconModifier: ViewModifier {
     func body(content: Content) -> some View {
         content

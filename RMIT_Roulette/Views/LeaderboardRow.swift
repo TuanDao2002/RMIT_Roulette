@@ -17,21 +17,21 @@ struct LeaderboardRow: View {
                 Image("1st_rank")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 65, height: 60)
+                    .frame(width: 75, height: 60)
             } else if (rank == 2) {
                 Image("2nd_rank")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 65, height: 60)
+                    .frame(width: 75, height: 60)
             } else if (rank == 3) {
                 Image("3rd_rank")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 65, height: 60)
+                    .frame(width: 75, height: 60)
             } else {
                 Text("\(rank)")
                     .font(.system(size: 40))
-                    .frame(width: 65)
+                    .frame(width: 75)
             }
             
             VStack(alignment: .leading) {

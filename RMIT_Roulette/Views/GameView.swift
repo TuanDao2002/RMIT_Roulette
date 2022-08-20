@@ -7,18 +7,6 @@
 
 import SwiftUI
 import AudioToolbox
-enum ColorRoulette: String {
-    case red = "RED"
-    case black = "BLACK"
-    case green = "GREEN"
-    case empty
-}
-
-enum ResultStatus: String {
-    case SM = "GOOD JOB 😇"
-    case BW = "NICE BET 🥳"
-    case LO = "UNLUCKY 😢"
-}
 
 struct Sector: Equatable, Hashable {
     var number: Int
@@ -147,13 +135,13 @@ struct GameView: View {
         var sector: Sector = Sector(number: -1, color: .empty)
         
         while sector == Sector(number: -1, color: .empty) && i < sectors.count {
-            let start: Double = halfSector * Double((i*2 + 1)) - halfSector
-            let end: Double = halfSector * Double((i*2 + 3))
+            let start: Double = halfSector * Double((i * 2 + 1)) - halfSector
+            let end: Double = halfSector * Double((i * 2 + 3))
             
             if(angle > start && angle < end) {
                 sector = sectors[i]
             }
-            i+=1
+            i += 1
         }
         
         return sector
@@ -320,15 +308,13 @@ struct GameView: View {
                         .multilineTextAlignment(.center)
                     
                     Text(bonusMoney > 0 ? "+\(bonusMoney)" : "\(bonusMoney)")
-                        .foregroundColor(bonusMoney > 0 ? .green : .red)
                         .fontWeight(.bold)
-                        .frame(maxWidth: 250, alignment: .trailing)
-                        .opacity(statusAppear ? 1 : 0)
+                        .modifier(ShowBonus(bonus: bonusMoney, statusAppear: statusAppear))
                         .onChange(of: statusAppear) {newValue in
                             withAnimation(Animation.easeInOut(duration: 5)) {
                                 statusAppear = false
                             }
-                        }
+                    }
                     
                     HStack {
                         Text("Your money:")
@@ -339,15 +325,14 @@ struct GameView: View {
                     }.modifier(StatusTextFieldModifier())
                     
                     Text("+\(bonusScore)")
-                        .foregroundColor(.green)
                         .fontWeight(.bold)
-                        .frame(maxWidth: 250, alignment: .trailing)
+                        .modifier(ShowBonus(bonus: bonusScore, statusAppear: statusAppear))
                         .opacity(bonusScore > 0 && statusAppear ? 1 : 0)
                         .onChange(of: statusAppear) {newValue in
                             withAnimation(Animation.easeInOut(duration: 5)) {
                                 statusAppear = false
                             }
-                        }
+                    }
                     
                     HStack {
                         Text("High score:")

@@ -27,6 +27,10 @@
 		A4D8A2B728A942E600DEEF3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4D8A2B628A942E600DEEF3A /* Preview Assets.xcassets */; };
 		A4D8A2C528A94CEE00DEEF3A /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2C428A94CEE00DEEF3A /* Modifiers.swift */; };
 		A4D8A2C728A94D0400DEEF3A /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2C628A94D0400DEEF3A /* PlaySound.swift */; };
+		A4E03FDE28B12C99000C27DA /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E03FDD28B12C99000C27DA /* MilestoneView.swift */; };
+		A4E03FE128B13B4F000C27DA /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E03FE028B13B4F000C27DA /* Badge.swift */; };
+		A4E03FE328B13BA8000C27DA /* ColorRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E03FE228B13BA8000C27DA /* ColorRoulette.swift */; };
+		A4E03FE528B13BC5000C27DA /* ResultStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E03FE428B13BC5000C27DA /* ResultStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +55,10 @@
 		A4D8A2B628A942E600DEEF3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A4D8A2C428A94CEE00DEEF3A /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		A4D8A2C628A94D0400DEEF3A /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		A4E03FDD28B12C99000C27DA /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
+		A4E03FE028B13B4F000C27DA /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		A4E03FE228B13BA8000C27DA /* ColorRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRoulette.swift; sourceTree = "<group>"; };
+		A4E03FE428B13BC5000C27DA /* ResultStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +99,7 @@
 		A4D8A2AE28A942E200DEEF3A /* RMIT_Roulette */ = {
 			isa = PBXGroup;
 			children = (
+				A4E03FDF28B13B39000C27DA /* Enum */,
 				A482F06328AFE2A300828891 /* Model */,
 				A4D8A2BF28A94C4900DEEF3A /* Sounds */,
 				A4D8A2BE28A94AE400DEEF3A /* Helpers */,
@@ -120,6 +129,7 @@
 				A49E0E0928A9FF0D004BB2E1 /* ButtonView.swift */,
 				A482F05F28AFD5F700828891 /* DotView.swift */,
 				A482F06128AFDA6200828891 /* LeaderboardRow.swift */,
+				A4E03FDD28B12C99000C27DA /* MilestoneView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -145,6 +155,16 @@
 				A4A43D3F28AD35B90051D51A /* coin_big_win.wav */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		A4E03FDF28B13B39000C27DA /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				A4E03FE028B13B4F000C27DA /* Badge.swift */,
+				A4E03FE228B13BA8000C27DA /* ColorRoulette.swift */,
+				A4E03FE428B13BC5000C27DA /* ResultStatus.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A482F06228AFDA6200828891 /* LeaderboardRow.swift in Sources */,
+				A4E03FDE28B12C99000C27DA /* MilestoneView.swift in Sources */,
 				A4D8A2B228A942E200DEEF3A /* ContentView.swift in Sources */,
 				A49E0E0628A9FCE0004BB2E1 /* Leaderboard.swift in Sources */,
 				A482F06028AFD5F700828891 /* DotView.swift in Sources */,
@@ -234,6 +255,9 @@
 				A4D8A2B028A942E200DEEF3A /* RMIT_RouletteApp.swift in Sources */,
 				A49E0E0428A9FC85004BB2E1 /* GameView.swift in Sources */,
 				A49E0E0828A9FCF9004BB2E1 /* HowToPlay.swift in Sources */,
+				A4E03FE528B13BC5000C27DA /* ResultStatus.swift in Sources */,
+				A4E03FE328B13BA8000C27DA /* ColorRoulette.swift in Sources */,
+				A4E03FE128B13B4F000C27DA /* Badge.swift in Sources */,
 				A482F06528AFE2B400828891 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
