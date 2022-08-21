@@ -61,7 +61,7 @@ struct HowToPlay: View {
                                             .font(.title)
                                             .fontWeight(.bold)) {
                             Text("In hard mode, you can bet 2 values")
-                            Text("You will win if one of them is matched with the result value, your money will increase by 2000 and high score increases by 200")
+                            Text("You will win if one of them is matched with the result value, your money will increase by 1000 and high score increases by 500")
                             Text("If none of them is matched with the result value, your money will decrease by 100 and your score will not increase")
                         }
                         .listRowBackground(Color("ColorYellow"))

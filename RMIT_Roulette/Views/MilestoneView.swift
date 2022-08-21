@@ -8,24 +8,13 @@
 import SwiftUI
 
 struct MilestoneView: View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var showAchievement: Bool
     var badge: Badge
     var milestoneScore: Int = 0
-    
-    init(badge: Badge) {
-        self.badge = badge
-        if (badge == .pro) {
-            self.milestoneScore = 1000
-        } else if (badge == .master) {
-            self.milestoneScore = 5000
-        } else if (badge == .legend) {
-            self.milestoneScore = 10000
-        }
-    }
-    
+
     var body: some View {
         ZStack {
-            Color("ColorGreen")
+            Color("ColorBlue")
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Text("You have achieve a new badge")
@@ -33,18 +22,16 @@ struct MilestoneView: View {
                     .fontWeight(.heavy)
                     .foregroundColor(Color("ColorYellow"))
                     .padding()
-                    .frame(minWidth: 280, idealWidth: 280, maxWidth: 320)
+                    .frame(minWidth: 100, idealWidth: 200, maxWidth: 300)
                     .background(Color("ColorRedRMIT"))
                     .multilineTextAlignment(.center)
-                
-                Spacer()
-                
+                                
                 VStack {
                     if (badge == .pro) {
                         Image("pro_badge")
                             .resizable()
                             .scaledToFit()
-                            .frame(maxHeight: 250)
+                            .frame(maxHeight: 150)
                     } else if (badge == .master) {
                         Image("master_badge")
                             .resizable()
@@ -57,13 +44,13 @@ struct MilestoneView: View {
                             .frame(maxHeight: 150)
                     }
                    
-                    Text("Your high score has reached \(milestoneScore)")
+                    Text("Your high score has reached \(badge.rawValue)")
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
                     Button {
-                        dismiss()
+                        self.showAchievement = false
                     } label: {
                         Text("Accept".uppercased())
                             .frame(width: 200)
@@ -72,16 +59,15 @@ struct MilestoneView: View {
                     )
                 }
             }
-            .frame(minWidth: 280, idealWidth: 280, maxWidth: 320, minHeight: 280, idealHeight: 300, maxHeight: 400, alignment: .center)
-            .background(Color("ColorBlueRMIT"))
-            .cornerRadius(20)
+            .padding(.vertical)
         }
-        
+        .frame(minWidth: 280, idealWidth: 280, maxWidth: 320, minHeight: 280, idealHeight: 300, maxHeight: 400, alignment: .center)
+        .cornerRadius(20)
     }
 }
 
 struct MilestoneView_Previews: PreviewProvider {
     static var previews: some View {
-        MilestoneView(badge: Badge.master)
+        MilestoneView(showAchievement: .constant(true), badge: Badge.legend)
     }
 }

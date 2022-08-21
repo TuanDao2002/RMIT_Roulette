@@ -8,11 +8,6 @@
 import SwiftUI
 import AudioToolbox
 
-struct Sector: Equatable, Hashable {
-    var number: Int
-    let color: ColorRoulette
-}
-
 struct GameView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.dismiss) var dismiss
@@ -24,6 +19,8 @@ struct GameView: View {
     @State private var rand = 0.0
     @State private var newAngle = 0.0
 
+    @State var showAchievement = false
+    @State private var newBadge: Badge = .empty
     @State private var showInput = false
     @State private var showInfo = false
     @State private var showingAlert = false
@@ -33,7 +30,7 @@ struct GameView: View {
     @State private var colorValue: ColorRoulette = .green
     
     @State private var sectorsToBet: [Sector] = []
-    @AppStorage("level") var level: String = "Medium"
+    @AppStorage("level") var level: String = "Hard"
     @State private var numOfSectorsToBet: Int = 0
     
     @State private var yourMoney: Int = 1000
@@ -60,44 +57,7 @@ struct GameView: View {
     }
     
     let halfSector = 360.0 / 37.0 / 2.0
-    let sectors: [Sector] = [Sector(number: 32, color: .red),
-                             Sector(number: 15, color: .black),
-                             Sector(number: 19, color: .red),
-                             Sector(number: 4, color: .black),
-                             Sector(number: 21, color: .red),
-                             Sector(number: 2, color: .black),
-                             Sector(number: 25, color: .red),
-                             Sector(number: 17, color: .black),
-                             Sector(number: 34, color: .red),
-                             Sector(number: 6, color: .black),
-                             Sector(number: 27, color: .red),
-                             Sector(number: 13, color: .black),
-                             Sector(number: 36, color: .red),
-                             Sector(number: 11, color: .black),
-                             Sector(number: 30, color: .red),
-                             Sector(number: 8, color: .black),
-                             Sector(number: 23, color: .red),
-                             Sector(number: 10, color: .black),
-                             Sector(number: 5, color: .red),
-                             Sector(number: 24, color: .black),
-                             Sector(number: 16, color: .red),
-                             Sector(number: 33, color: .black),
-                             Sector(number: 1, color: .red),
-                             Sector(number: 20, color: .black),
-                             Sector(number: 14, color: .red),
-                             Sector(number: 31, color: .black),
-                             Sector(number: 9, color: .red),
-                             Sector(number: 22, color: .black),
-                             Sector(number: 18, color: .red),
-                             Sector(number: 29, color: .black),
-                             Sector(number: 7, color: .red),
-                             Sector(number: 28, color: .black),
-                             Sector(number: 12, color: .red),
-                             Sector(number: 35, color: .black),
-                             Sector(number: 3, color: .red),
-                             Sector(number: 26, color: .black),
-                             Sector(number: 0, color: .green)]
-    
+    let sectors: [Sector] = RouletteSectors.get()
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible()),
@@ -249,8 +209,7 @@ struct GameView: View {
             resultStatus = .BW
 
             if (level == "Hard") {
-                bonusMoney = bonusMoney * 2
-                bonusScore = bonusScore * 2
+                bonusScore = bonusScore * 5
             }
             
             bonusMoney = bonusMoney
@@ -275,6 +234,17 @@ struct GameView: View {
         
         yourMoney += bonusMoney
         highScore += bonusScore
+        
+        if (highScore >= 10000) {
+            showAchievement = true
+            newBadge = .legend
+        } else if (highScore >= 5000) {
+            showAchievement = true
+            newBadge = .master
+        } else if (highScore >= 1000) {
+            showAchievement = true
+            newBadge = .pro
+        }
         
         if (yourMoney <= 0) {
             yourMoney = 0
@@ -380,6 +350,11 @@ struct GameView: View {
                 .disabled(isAnimating == true)
                 .modifier(ButtonModifier())
             }
+            .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement))
+            
+            if (showAchievement) {
+                MilestoneView(showAchievement: $showAchievement, badge: newBadge)
+            }
         }
         .overlay(
             Button(action: {
@@ -391,7 +366,10 @@ struct GameView: View {
             }) {
               Image(systemName: "house.circle")
                 .foregroundColor(Color("ColorYellow"))
-            }.modifier(IconModifier()), alignment: .topLeading
+            }
+            .modifier(IconModifier())
+            .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement)),
+            alignment: .topLeading
         )
         .overlay(
             Button(action: {
@@ -400,11 +378,14 @@ struct GameView: View {
             }) {
               Image(systemName: "info.circle")
                 .foregroundColor(Color("ColorYellow"))
-            }.modifier(IconModifier()), alignment: .topTrailing
+            }
+            .modifier(IconModifier())
+            .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement)),
+            alignment: .topTrailing
         )
         
         .onAppear(perform: {
-            playSound(sound: "background_music_casino", type: "mp3", loop: true)
+//            playSound(sound: "background_music_casino", type: "mp3", loop: true)
         })
         
         .onChange(of: scenePhase) { newPhase in
@@ -491,7 +472,7 @@ struct GameView: View {
                         isAnimating = true
                         rand = Double.random(in: 1...360)
                         withAnimation(spinAnimation) {
-                            spinDegrees += 720.0 + rand
+                            spinDegrees += 720.0 + rand - rand
                         }
                         newAngle = getAngle(angle: spinDegrees)
                         

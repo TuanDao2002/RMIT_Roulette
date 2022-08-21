@@ -7,6 +7,9 @@
 
 import Foundation
 
-enum Badge {
-    case pro, master, legend
+enum Badge: Int {
+    case legend = 10000
+    case master = 5000
+    case pro = 1000
+    case empty
 }

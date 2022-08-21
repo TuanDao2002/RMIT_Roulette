@@ -65,6 +65,15 @@ struct ShowBonus: ViewModifier {
     }
 }
 
+struct BlurViewWhenMilestoneAppear: ViewModifier {
+    var showAchievement: Bool
+    func body(content: Content) -> some View {
+        content
+            .blur(radius: showAchievement ? 5 : 0 , opaque: false)
+            .allowsHitTesting(!showAchievement)
+    }
+}
+
 struct IconModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
