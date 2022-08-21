@@ -50,12 +50,6 @@ struct Leaderboard: View {
                     }
                 }
                 Spacer()
-                
-                Button(action: {
-                    userVM.add(newUser: User(username: "tuan", highScore: 99999, badge: Badge.pro))
-                }) {
-                    Text("add user")
-                }.modifier(ButtonModifier())
             }
             .modifier(AddBottomBarModifier()),
             alignment: .bottom

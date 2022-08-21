@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A42C95AF28B1EDB100A86C68 /* RouletteSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42C95AE28B1EDB100A86C68 /* RouletteSector.swift */; };
+		A43BEB4828B27754005A5A81 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BEB4728B27754005A5A81 /* RegisterView.swift */; };
 		A4420AC628AE0301001EA456 /* background_music_menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4420AC528AE0301001EA456 /* background_music_menu.mp3 */; };
 		A4420ACA28AE1AC6001EA456 /* background_music_casino.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4420AC928AE1AC6001EA456 /* background_music_casino.mp3 */; };
 		A453AF2828B230BB00271D87 /* RouletteSectorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453AF2728B230BB00271D87 /* RouletteSectorsViewModel.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		A42C95AE28B1EDB100A86C68 /* RouletteSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteSector.swift; sourceTree = "<group>"; };
+		A43BEB4728B27754005A5A81 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		A4420AC528AE0301001EA456 /* background_music_menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = background_music_menu.mp3; path = ../../../images/background_music_menu.mp3; sourceTree = "<group>"; };
 		A4420AC928AE1AC6001EA456 /* background_music_casino.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = background_music_casino.mp3; path = ../../../images/background_music_casino.mp3; sourceTree = "<group>"; };
 		A453AF2728B230BB00271D87 /* RouletteSectorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteSectorsViewModel.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				A482F05F28AFD5F700828891 /* DotView.swift */,
 				A482F06128AFDA6200828891 /* LeaderboardRow.swift */,
 				A4E03FDD28B12C99000C27DA /* MilestoneView.swift */,
+				A43BEB4728B27754005A5A81 /* RegisterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				A49E0E0A28A9FF0D004BB2E1 /* ButtonView.swift in Sources */,
 				A4D8A2C728A94D0400DEEF3A /* PlaySound.swift in Sources */,
 				A453AF2A28B235F900271D87 /* UserViewModel.swift in Sources */,
+				A43BEB4828B27754005A5A81 /* RegisterView.swift in Sources */,
 				A42C95AF28B1EDB100A86C68 /* RouletteSector.swift in Sources */,
 				A4D8A2C528A94CEE00DEEF3A /* Modifiers.swift in Sources */,
 				A4D8A2B028A942E200DEEF3A /* RMIT_RouletteApp.swift in Sources */,

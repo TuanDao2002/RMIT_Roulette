@@ -32,10 +32,12 @@ struct ButtonModifier: ViewModifier {
 struct OvalTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .padding(10)
-            .background(.gray)
-            .cornerRadius(20)
-            .shadow(color: .gray, radius: 10)
+            .font(.title2)
+            .padding(15)
+            .background(.white)
+            .cornerRadius(10)
+            .shadow(color: .white, radius: 1)
+            .frame(minWidth: 80, idealWidth: 180, maxWidth: 280)
     }
 }
 
@@ -71,6 +73,15 @@ struct BlurViewWhenMilestoneAppear: ViewModifier {
         content
             .blur(radius: showAchievement ? 5 : 0 , opaque: false)
             .allowsHitTesting(!showAchievement)
+    }
+}
+
+struct BlurViewWhenRegisterAppear: ViewModifier {
+    var showRegister: Bool
+    func body(content: Content) -> some View {
+        content
+            .blur(radius: showRegister ? 5 : 0 , opaque: false)
+            .allowsHitTesting(!showRegister)
     }
 }
 

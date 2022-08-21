@@ -21,7 +21,7 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 900, minHeight: 215, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    ButtonView(destinationView: GameView(), buttonName: "Play game", changeBackgroundMusic: true)
+                    ButtonView(destinationView: GameView(userVM: userVM), buttonName: "Play game", changeBackgroundMusic: true)
                     ButtonView(destinationView: Leaderboard(userVM: userVM), buttonName: "Leaderboard", changeBackgroundMusic: false)
                     ButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play", changeBackgroundMusic: false)
                 }

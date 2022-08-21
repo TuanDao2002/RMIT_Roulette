@@ -11,6 +11,7 @@ import AudioToolbox
 struct GameView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.dismiss) var dismiss
+    private var userVM: UserViewModel
     
     @State private var atGameView = true
     
@@ -19,6 +20,7 @@ struct GameView: View {
     @State private var rand = 0.0
     @State private var newAngle = 0.0
 
+    @State var showRegister = true
     @State var showAchievement = false
     @State private var newBadge: Badge = .empty
     @State private var showInput = false
@@ -52,7 +54,8 @@ struct GameView: View {
         }
     }
     
-    init() {
+    init(userVM: UserViewModel) {
+        self.userVM = userVM
         self.currentWorkItem = workItem()
     }
     
@@ -236,15 +239,18 @@ struct GameView: View {
         highScore += bonusScore
         
         if (highScore >= 10000) {
-            showAchievement = true
             newBadge = .legend
         } else if (highScore >= 5000) {
-            showAchievement = true
             newBadge = .master
         } else if (highScore >= 1000) {
-            showAchievement = true
             newBadge = .pro
         }
+        
+        if (userVM.getCurrentUser().badge != newBadge) {
+            showAchievement = true
+        }
+        
+        userVM.updateCurrentUser(highScore: highScore, badge: newBadge)
         
         if (yourMoney <= 0) {
             yourMoney = 0
@@ -351,9 +357,14 @@ struct GameView: View {
                 .modifier(ButtonModifier())
             }
             .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement))
+            .modifier(BlurViewWhenRegisterAppear(showRegister: showRegister))
             
             if (showAchievement) {
                 MilestoneView(showAchievement: $showAchievement, badge: newBadge)
+            }
+            
+            if (showRegister) {
+                RegisterView(showRegister: $showRegister, userVM: userVM)
             }
         }
         .overlay(
@@ -368,7 +379,8 @@ struct GameView: View {
                 .foregroundColor(Color("ColorYellow"))
             }
             .modifier(IconModifier())
-            .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement)),
+            .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement))
+            .modifier(BlurViewWhenRegisterAppear(showRegister: showRegister)),
             alignment: .topLeading
         )
         .overlay(
@@ -380,7 +392,8 @@ struct GameView: View {
                 .foregroundColor(Color("ColorYellow"))
             }
             .modifier(IconModifier())
-            .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement)),
+            .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement))
+            .modifier(BlurViewWhenRegisterAppear(showRegister: showRegister)),
             alignment: .topTrailing
         )
         
@@ -508,6 +521,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(userVM: UserViewModel())
     }
 }

@@ -24,10 +24,6 @@ final class UserViewModel: ObservableObject {
     @Published var users: [User] = []
     
     init() {
-        // reset all data in UserDefault
-        users = []
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(users), forKey: "users")
-        
         // populate UserDefault with mock data
         for user in mockUsers {
             self.add(newUser: user)
@@ -44,6 +40,17 @@ final class UserViewModel: ObservableObject {
     
     func add(newUser: User) {
         users.append(newUser)
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(users), forKey: "users")
+    }
+    
+    func getCurrentUser() -> User {
+        if (users.count == 0) { return User(username: "", highScore: -1, badge: .empty)}
+        let lastIndex = users.count - 1
+        return users[lastIndex]
+    }
+    
+    func updateCurrentUser(highScore: Int, badge: Badge) {
+        users[users.count - 1] = User(username: getCurrentUser().username, highScore: highScore, badge: badge)
         UserDefaults.standard.set(try? PropertyListEncoder().encode(users), forKey: "users")
     }
     

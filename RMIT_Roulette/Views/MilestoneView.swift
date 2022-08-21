@@ -23,7 +23,6 @@ struct MilestoneView: View {
                     .foregroundColor(Color("ColorYellow"))
                     .padding()
                     .frame(minWidth: 100, idealWidth: 200, maxWidth: 300)
-                    .background(Color("ColorRedRMIT"))
                     .multilineTextAlignment(.center)
                                 
                 VStack {

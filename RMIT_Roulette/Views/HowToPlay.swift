@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct HowToPlay: View {
     @Environment(\.dismiss) var dismiss
@@ -74,7 +75,8 @@ struct HowToPlay: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                      dismiss()
+                        AudioServicesPlaySystemSound(1306)
+                        dismiss()
                     }) {
                         VStack {
                             Image(systemName: "house.circle")
@@ -91,7 +93,8 @@ struct HowToPlay: View {
         
         .overlay(
             Button(action: {
-              dismiss()
+                AudioServicesPlaySystemSound(1306)
+                dismiss()
             }) {
                 Image(systemName: "xmark.circle")
                     .font(.largeTitle)

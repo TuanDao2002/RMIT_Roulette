@@ -40,6 +40,6 @@ struct ButtonView<Content: View>: View {
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(destinationView: GameView(), buttonName: "Play game", changeBackgroundMusic: true)
+        ButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play", changeBackgroundMusic: false)
     }
 }
