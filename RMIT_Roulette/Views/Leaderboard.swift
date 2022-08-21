@@ -10,41 +10,13 @@ import AudioToolbox
 
 struct Leaderboard: View {
     @Environment(\.dismiss) var dismiss
-
-    private var users = [
-        User(username: "tuan", highScore: 100 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-        User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: "Pro"),
-    ]
+    private var userVM: UserViewModel
+    private var users : [User] = []
+    
+    init(userVM: UserViewModel) {
+        self.userVM = userVM
+        self.users = userVM.returnSorted()
+    }
     
     var body: some View {
         ZStack {
@@ -78,6 +50,12 @@ struct Leaderboard: View {
                     }
                 }
                 Spacer()
+                
+                Button(action: {
+                    userVM.add(newUser: User(username: "tuan", highScore: 99999, badge: Badge.pro))
+                }) {
+                    Text("add user")
+                }.modifier(ButtonModifier())
             }
             .modifier(AddBottomBarModifier()),
             alignment: .bottom
@@ -88,6 +66,6 @@ struct Leaderboard: View {
 
 struct Leaderboard_Previews: PreviewProvider {
     static var previews: some View {
-        Leaderboard()
+        Leaderboard(userVM: UserViewModel())
     }
 }

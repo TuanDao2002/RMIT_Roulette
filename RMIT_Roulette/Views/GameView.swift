@@ -29,7 +29,7 @@ struct GameView: View {
     @State private var numberValue: Int = 0
     @State private var colorValue: ColorRoulette = .green
     
-    @State private var sectorsToBet: [Sector] = []
+    @State private var sectorsToBet: [RouletteSector] = []
     @AppStorage("level") var level: String = "Hard"
     @State private var numOfSectorsToBet: Int = 0
     
@@ -57,7 +57,7 @@ struct GameView: View {
     }
     
     let halfSector = 360.0 / 37.0 / 2.0
-    let sectors: [Sector] = RouletteSectors.get()
+    let sectors: [RouletteSector] = RouletteSectorsViewModel.get()
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible()),
@@ -77,7 +77,7 @@ struct GameView: View {
         return deg
     }
     
-    func returnColor(sector: Sector) -> Color {
+    func returnColor(sector: RouletteSector) -> Color {
         let fontColor: Color
         if (sector.color.rawValue == "RED") {
             fontColor = .red
@@ -90,11 +90,11 @@ struct GameView: View {
         return fontColor
     }
     
-    func sectorFromAngle(angle: Double) -> Sector {
+    func sectorFromAngle(angle: Double) -> RouletteSector {
         var i = 0
-        var sector: Sector = Sector(number: -1, color: .empty)
+        var sector: RouletteSector = RouletteSector(number: -1, color: .empty)
         
-        while sector == Sector(number: -1, color: .empty) && i < sectors.count {
+        while sector == RouletteSector(number: -1, color: .empty) && i < sectors.count {
             let start: Double = halfSector * Double((i * 2 + 1)) - halfSector
             let end: Double = halfSector * Double((i * 2 + 3))
             
@@ -167,13 +167,13 @@ struct GameView: View {
         .padding()
     }
     
-    func displaySectors(sectors: [Sector]) -> [Sector] {
+    func displaySectors(sectors: [RouletteSector]) -> [RouletteSector] {
         var customSector = sectors
         customSector.removeLast()
         return customSector.sorted(by: {$0.number < $1.number})
     }
     
-    func displayEachSector(sector: Sector) -> some View {
+    func displayEachSector(sector: RouletteSector) -> some View {
         return Button(action: {
             AudioServicesPlaySystemSound(1306)
             if (level == "Easy") {

@@ -43,18 +43,18 @@ struct LeaderboardRow: View {
                     .fontWeight(.medium)
             }
             Spacer()
-            if (user.highScore >= 10000) {
-                Image("legend_badge")
+            if (user.badge == Badge.pro) {
+                Image("pro_badge")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 65, height: 60)
-            } else if (user.highScore >= 5000) {
+            } else if (user.badge == Badge.master) {
                 Image("master_badge")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 65, height: 60)
-            } else if (user.highScore >= 1000) {
-                Image("pro_badge")
+            } else if (user.badge == Badge.legend) {
+                Image("legend_badge")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 65, height: 60)
@@ -68,6 +68,6 @@ struct LeaderboardRow: View {
 
 struct LeaderboardRow_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardRow(user: User(username: "Tuan", highScore: 10000, badge: "Pro"), rank: 1)
+        LeaderboardRow(user: User(username: "Tuan", highScore: 10000, badge: Badge.pro), rank: 1)
     }
 }

@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct User: Hashable {
+struct User: Codable, Hashable {
     var username: String
     var highScore: Int
-    var badge: String
+    var badge: Badge
     
-    init(username: String, highScore: Int, badge: String) {
+    init(username: String, highScore: Int, badge: Badge) {
         self.username = username
         self.highScore = highScore
         self.badge = badge

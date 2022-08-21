@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A42C95AF28B1EDB100A86C68 /* RouletteSectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42C95AE28B1EDB100A86C68 /* RouletteSectors.swift */; };
+		A42C95AF28B1EDB100A86C68 /* RouletteSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42C95AE28B1EDB100A86C68 /* RouletteSector.swift */; };
 		A4420AC628AE0301001EA456 /* background_music_menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4420AC528AE0301001EA456 /* background_music_menu.mp3 */; };
 		A4420ACA28AE1AC6001EA456 /* background_music_casino.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4420AC928AE1AC6001EA456 /* background_music_casino.mp3 */; };
+		A453AF2828B230BB00271D87 /* RouletteSectorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453AF2728B230BB00271D87 /* RouletteSectorsViewModel.swift */; };
+		A453AF2A28B235F900271D87 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453AF2928B235F900271D87 /* UserViewModel.swift */; };
 		A482F06028AFD5F700828891 /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F05F28AFD5F700828891 /* DotView.swift */; };
 		A482F06228AFDA6200828891 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F06128AFDA6200828891 /* LeaderboardRow.swift */; };
 		A482F06528AFE2B400828891 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F06428AFE2B400828891 /* User.swift */; };
@@ -35,9 +37,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A42C95AE28B1EDB100A86C68 /* RouletteSectors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteSectors.swift; sourceTree = "<group>"; };
+		A42C95AE28B1EDB100A86C68 /* RouletteSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteSector.swift; sourceTree = "<group>"; };
 		A4420AC528AE0301001EA456 /* background_music_menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = background_music_menu.mp3; path = ../../../images/background_music_menu.mp3; sourceTree = "<group>"; };
 		A4420AC928AE1AC6001EA456 /* background_music_casino.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = background_music_casino.mp3; path = ../../../images/background_music_casino.mp3; sourceTree = "<group>"; };
+		A453AF2728B230BB00271D87 /* RouletteSectorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteSectorsViewModel.swift; sourceTree = "<group>"; };
+		A453AF2928B235F900271D87 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		A482F05F28AFD5F700828891 /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		A482F06128AFDA6200828891 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
 		A482F06428AFE2B400828891 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -74,17 +78,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A42C95AD28B1ED8800A86C68 /* Utils */ = {
+		A453AF2628B22EEA00271D87 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				A42C95AE28B1EDB100A86C68 /* RouletteSectors.swift */,
+				A453AF2728B230BB00271D87 /* RouletteSectorsViewModel.swift */,
+				A453AF2928B235F900271D87 /* UserViewModel.swift */,
 			);
-			path = Utils;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		A482F06328AFE2A300828891 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A42C95AE28B1EDB100A86C68 /* RouletteSector.swift */,
 				A482F06428AFE2B400828891 /* User.swift */,
 			);
 			path = Model;
@@ -109,8 +115,7 @@
 		A4D8A2AE28A942E200DEEF3A /* RMIT_Roulette */ = {
 			isa = PBXGroup;
 			children = (
-				A42C95AD28B1ED8800A86C68 /* Utils */,
-				A4E03FDF28B13B39000C27DA /* Enum */,
+				A453AF2628B22EEA00271D87 /* ViewModel */,
 				A482F06328AFE2A300828891 /* Model */,
 				A4D8A2BF28A94C4900DEEF3A /* Sounds */,
 				A4D8A2BE28A94AE400DEEF3A /* Helpers */,
@@ -133,6 +138,7 @@
 		A4D8A2BD28A94ADB00DEEF3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4E03FDF28B13B39000C27DA /* Enum */,
 				A4D8A2B128A942E200DEEF3A /* ContentView.swift */,
 				A49E0E0328A9FC85004BB2E1 /* GameView.swift */,
 				A49E0E0528A9FCE0004BB2E1 /* Leaderboard.swift */,
@@ -262,10 +268,12 @@
 				A482F06028AFD5F700828891 /* DotView.swift in Sources */,
 				A49E0E0A28A9FF0D004BB2E1 /* ButtonView.swift in Sources */,
 				A4D8A2C728A94D0400DEEF3A /* PlaySound.swift in Sources */,
-				A42C95AF28B1EDB100A86C68 /* RouletteSectors.swift in Sources */,
+				A453AF2A28B235F900271D87 /* UserViewModel.swift in Sources */,
+				A42C95AF28B1EDB100A86C68 /* RouletteSector.swift in Sources */,
 				A4D8A2C528A94CEE00DEEF3A /* Modifiers.swift in Sources */,
 				A4D8A2B028A942E200DEEF3A /* RMIT_RouletteApp.swift in Sources */,
 				A49E0E0428A9FC85004BB2E1 /* GameView.swift in Sources */,
+				A453AF2828B230BB00271D87 /* RouletteSectorsViewModel.swift in Sources */,
 				A49E0E0828A9FCF9004BB2E1 /* HowToPlay.swift in Sources */,
 				A4E03FE528B13BC5000C27DA /* ResultStatus.swift in Sources */,
 				A4E03FE328B13BA8000C27DA /* ColorRoulette.swift in Sources */,
