@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct ContentView: View {
     @EnvironmentObject var userVM: UserViewModel
     @Environment(\.scenePhase) var scenePhase
     @State var isLinkActive = false
+    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isUseSystem") private var isUseSystem = false
     
     var body: some View {
         NavigationView {
@@ -20,15 +24,24 @@ struct ContentView: View {
                     Image("roulette_logo")
                         .resizable()
                         .scaledToFit()
-                        .frame(maxWidth: 900, minHeight: 215, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    ButtonView(destinationView: GameView(userVM: userVM), buttonName: "Play game", changeBackgroundMusic: true)
-                    ButtonView(destinationView: Leaderboard(userVM: userVM), buttonName: "Leaderboard", changeBackgroundMusic: false)
-                    ButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play", changeBackgroundMusic: false)
+                        .frame(maxWidth: 900, minHeight: 215, alignment: .center)
+                    NavigateButtonView(destinationView: GameView(userVM: userVM), buttonName: "Play game", changeBackgroundMusic: true, customBackButton: true)
+                        .modifier(ButtonModifier())
+                    NavigateButtonView(destinationView: Leaderboard(userVM: userVM), buttonName: "Leaderboard", changeBackgroundMusic: false, customBackButton: true)
+                        .modifier(ButtonModifier())
+                    NavigateButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play", changeBackgroundMusic: false, customBackButton: true)
+                        .modifier(ButtonModifier())
+                    NavigateButtonView(destinationView: SettingView(isDarkMode: $isDarkMode, isUseSystem: $isUseSystem), buttonName: "Setting", changeBackgroundMusic: false, customBackButton: false)
+                        .modifier(ButtonModifier())
                 }
             }
+    
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+
         .onAppear(perform: {
-//            playSound(sound: "background_music_menu", type: "mp3", loop: true)
+            //            playSound(sound: "background_music_menu", type: "mp3", loop: true)
+            SystemThemeManager.shared.handleTheme(darkMode: isDarkMode, system: isUseSystem)
         })
         
         .onChange(of: scenePhase) { newPhase in
@@ -38,8 +51,6 @@ struct ContentView: View {
                 emptySound()
             }
         }
-        
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
