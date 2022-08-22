@@ -8,15 +8,15 @@
 import Foundation
 
 let mockUsers = [
-    User(username: "tuan", highScore: 99999, badge: Badge.pro),
-    User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: Badge.pro),
-    User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: Badge.pro),
-    User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: Badge.pro),
-    User(username: "tuan", highScore: 100, badge: Badge.pro),
-    User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: Badge.pro),
-    User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: Badge.pro),
-    User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: Badge.pro),
-    User(username: "tuan", highScore: 10 * Int.random(in: 100..<1001), badge: Badge.pro),
+    User(username: "Hello world:)))", highScore: 99999, badge: Badge.legend),
+    User(username: "asdf", highScore: 3123, badge: Badge.pro),
+    User(username: "a23e", highScore: 1023, badge: Badge.pro),
+    User(username: "23!d", highScore: 5123, badge: Badge.master),
+    User(username: "player", highScore: 100, badge: .empty),
+    User(username: "dd", highScore: 10222, badge: Badge.legend),
+    User(username: "tun", highScore: 1001, badge: Badge.pro),
+    User(username: "kha", highScore: 932, badge: .empty),
+    User(username: "fdffd", highScore: 102, badge: .empty),
 ]
 
 

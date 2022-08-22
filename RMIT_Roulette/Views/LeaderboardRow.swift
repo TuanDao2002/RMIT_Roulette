@@ -38,6 +38,8 @@ struct LeaderboardRow: View {
                 Text(user.username)
                     .font(.title)
                     .fontWeight(.medium)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                 Text("\(user.highScore)")
                     .font(.title2)
                     .fontWeight(.medium)
@@ -68,6 +70,6 @@ struct LeaderboardRow: View {
 
 struct LeaderboardRow_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardRow(user: User(username: "Tuan", highScore: 10000, badge: Badge.pro), rank: 1)
+        LeaderboardRow(user: User(username: "Hello worldfffffffffffffffffffffffffff:))))", highScore: 10000, badge: Badge.pro), rank: 1)
     }
 }

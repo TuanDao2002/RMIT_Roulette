@@ -40,7 +40,7 @@ struct ContentView: View {
         .navigationViewStyle(StackNavigationViewStyle())
 
         .onAppear(perform: {
-            //            playSound(sound: "background_music_menu", type: "mp3", loop: true)
+//            playSound(sound: "background_music_menu", type: "mp3", loop: true)
             SystemThemeManager.shared.handleTheme(darkMode: isDarkMode, system: isUseSystem)
         })
         
