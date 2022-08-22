@@ -24,6 +24,7 @@ struct Leaderboard: View {
             ScrollView {
                 VStack(spacing: 10) {
                     Text("Leaderboard")
+                        .foregroundColor(Color("LeaderboardHeaderColor"))
                         .font(.system(size: 40))
                         .fontWeight(.bold)
                     
@@ -45,6 +46,7 @@ struct Leaderboard: View {
                 }) {
                     VStack {
                         Image(systemName: "house.circle")
+                            .foregroundColor(.black)
                             .font(.system(size: 40))
                         Text("Home")
                     }

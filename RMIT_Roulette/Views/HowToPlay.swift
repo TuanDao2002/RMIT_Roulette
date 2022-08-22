@@ -26,6 +26,7 @@ struct HowToPlay: View {
                         .frame(maxWidth: 400, maxHeight: 200, alignment: .center)
                     Form {
                         Section(header: Text("How To Play")
+                                            .foregroundColor(Color("SectionHeaderColor"))
                                             .font(.title)
                                             .fontWeight(.bold)) {
                             Text("1. Tap at the SPIN button")
@@ -39,6 +40,7 @@ struct HowToPlay: View {
                         .listRowBackground(Color("ColorYellow"))
                         
                         Section(header: Text("Easy mode")
+                                            .foregroundColor(Color("SectionHeaderColor"))
                                             .font(.title)
                                             .fontWeight(.bold)) {
                             Text("In easy mode, you can bet 6 values")
@@ -49,6 +51,7 @@ struct HowToPlay: View {
                         .listRowBackground(Color("ColorYellow"))
                         
                         Section(header: Text("Medium mode")
+                                            .foregroundColor(Color("SectionHeaderColor"))
                                             .font(.title)
                                             .fontWeight(.bold)) {
                             Text("In medium mode, you can bet 4 values")
@@ -59,6 +62,7 @@ struct HowToPlay: View {
                         .listRowBackground(Color("ColorYellow"))
                         
                         Section(header: Text("Hard mode")
+                                            .foregroundColor(Color("SectionHeaderColor"))
                                             .font(.title)
                                             .fontWeight(.bold)) {
                             Text("In hard mode, you can bet 2 values")
@@ -67,6 +71,7 @@ struct HowToPlay: View {
                         }
                         .listRowBackground(Color("ColorYellow"))
                     }
+                    .foregroundColor(.black)
                     .padding(.bottom, backToMenu ? UIDevice.current.userInterfaceIdiom == .phone ? 30 : 65 : 0)
                 }
         }

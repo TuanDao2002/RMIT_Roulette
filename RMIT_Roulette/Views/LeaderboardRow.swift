@@ -30,17 +30,20 @@ struct LeaderboardRow: View {
                     .frame(width: 75, height: 60)
             } else {
                 Text("\(rank)")
+                    .foregroundColor(.black)
                     .font(.system(size: 40))
                     .frame(width: 75)
             }
             
             VStack(alignment: .leading) {
                 Text(user.username)
+                    .foregroundColor(.black)
                     .font(.title)
                     .fontWeight(.medium)
                     .lineLimit(1)
                     .truncationMode(.tail)
                 Text("\(user.highScore)")
+                    .foregroundColor(.black)
                     .font(.title2)
                     .fontWeight(.medium)
             }
@@ -70,6 +73,7 @@ struct LeaderboardRow: View {
 
 struct LeaderboardRow_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardRow(user: User(username: "Hello worldfffffffffffffffffffffffffff:))))", highScore: 10000, badge: Badge.pro), rank: 1)
+        LeaderboardRow(user: User(username: "Hello worldfffffffffffffffffffffffffff:))))", highScore: 10000, badge: Badge.pro), rank: 4)
+            .preferredColorScheme(.dark)
     }
 }

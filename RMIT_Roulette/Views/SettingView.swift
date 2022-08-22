@@ -23,7 +23,7 @@ struct SettingView: View {
                     })
                     
                     Toggle(isOn: $isUseSystem, label: {
-                        Text("Use system settings")
+                        Text("Use system setting")
                     }).onChange(of: isUseSystem, perform: {_ in
                         SystemThemeManager.shared.handleTheme(darkMode: isDarkMode, system: isUseSystem)
                     })

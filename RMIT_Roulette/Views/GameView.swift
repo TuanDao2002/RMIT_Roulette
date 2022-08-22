@@ -133,6 +133,7 @@ struct GameView: View {
     func spinningText() -> some View {
         return HStack {
             Text("SPINING")
+                .foregroundColor(.black)
                 .fontWeight(.bold)
                 .font(.system(size: 25))
             DotView()
@@ -364,7 +365,7 @@ struct GameView: View {
             }
             
             if (showRegister) {
-                RegisterView(showRegister: $showRegister, userVM: userVM)
+                RegisterView(dismiss: dismiss, showRegister: $showRegister, userVM: userVM)
             }
         }
         .overlay(

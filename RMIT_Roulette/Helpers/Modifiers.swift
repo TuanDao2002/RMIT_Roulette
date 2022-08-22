@@ -32,6 +32,7 @@ struct ButtonModifier: ViewModifier {
 struct OvalTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
+            .foregroundColor(.black)
             .font(.title2)
             .padding(15)
             .background(.white)
@@ -44,11 +45,11 @@ struct OvalTextFieldStyle: TextFieldStyle {
 struct StatusTextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
+            .foregroundColor(.black)
             .frame(maxWidth: 250)
             .padding()
             .background(Color("ColorYellow"))
             .clipShape(Capsule())
-            .opacity(0.7)
             .overlay(
                 RoundedRectangle(cornerRadius: 35)
                     .stroke(Color.white, lineWidth: 2)
