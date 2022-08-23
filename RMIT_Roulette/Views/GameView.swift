@@ -32,7 +32,7 @@ struct GameView: View {
     @State private var colorValue: ColorRoulette = .green
     
     @State private var sectorsToBet: [RouletteSector] = []
-    @AppStorage("level") var level: String = "Hard"
+    @State private var level: Level
     @State private var numOfSectorsToBet: Int = 0
     
     @State private var yourMoney: Int = 1000
@@ -57,6 +57,7 @@ struct GameView: View {
     init(userVM: UserViewModel) {
         self.userVM = userVM
         self.currentWorkItem = workItem()
+//        self.level = level
     }
     
     let halfSector = 360.0 / 37.0 / 2.0
@@ -149,14 +150,14 @@ struct GameView: View {
             .fontWeight(.medium)
         
         var instructionText = Text("")
-        if (level == "Easy" || level == "Medium") {
+        if (level == Level.easy || level == Level.medium) {
             instructionText = Text("You can win if the result value is next to the value you choose")
                 .foregroundColor(Color("ColorYellow"))
                 .font(.title3)
                 .fontWeight(.medium)
         }
         
-        if (level == "Hard") {
+        if (level == Level.hard) {
             instructionText = Text("You can only win if the result value is 1 of 2 values you choose")
                 .foregroundColor(Color("ColorYellow"))
                 .font(.title3)
@@ -180,15 +181,15 @@ struct GameView: View {
     func displayEachSector(sector: RouletteSector) -> some View {
         return Button(action: {
             AudioServicesPlaySystemSound(1306)
-            if (level == "Easy") {
+            if (level == Level.easy) {
                 if (sectorsToBet.count < 6 && !sectorsToBet.contains(sector)) {
                     sectorsToBet.append(sector)
                 }
-            } else if (level == "Medium") {
+            } else if (level == Level.medium) {
                 if (sectorsToBet.count < 4 && !sectorsToBet.contains(sector)) {
                     sectorsToBet.append(sector)
                 }
-            } else if (level == "Hard") {
+            } else if (level == Level.hard) {
                 if (sectorsToBet.count < 2 && !sectorsToBet.contains(sector)) {
                     sectorsToBet.append(sector)
                 }
@@ -212,19 +213,19 @@ struct GameView: View {
         if (sectorsToBet.filter{$0.number == resultSector.number}.count > 0) {
             resultStatus = .BW
 
-            if (level == "Hard") {
+            if (level == Level.hard) {
                 bonusScore = bonusScore * 5
             }
             
             bonusMoney = bonusMoney
             bonusScore = bonusScore
             playSound(sound: "coin_big_win", type: "wav", loop: false)
-        } else if (level == "Easy" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
+        } else if (level == Level.easy && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
             resultStatus = .SM
             bonusMoney = bonusMoney / 10
             bonusScore = bonusScore / 10
             playSound(sound: "coin_small_win", type: "wav", loop: false)
-        } else if (level == "Medium" && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
+        } else if (level == Level.medium && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
             resultStatus = .SM
             bonusMoney = bonusMoney / 5
             bonusScore = bonusScore / 5
@@ -342,11 +343,11 @@ struct GameView: View {
                     showInput = true
                     sectorsToBet = []
                     
-                    if (level == "Easy") {
+                    if (level == Level.easy) {
                         numOfSectorsToBet = 6
-                    } else if (level == "Medium") {
+                    } else if (level == Level.medium) {
                         numOfSectorsToBet = 4
-                    } else if (level == "Hard") {
+                    } else if (level == Level.hard) {
                         numOfSectorsToBet = 2
                     }
                 }) {
@@ -522,6 +523,7 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(userVM: UserViewModel())
+        Text("Hello")
+//        GameView(userVM: UserViewModel(), level: Level.easy)
     }
 }

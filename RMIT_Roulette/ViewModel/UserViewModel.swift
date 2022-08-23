@@ -8,15 +8,15 @@
 import Foundation
 
 let mockUsers = [
-    User(username: "Hello world:)))", highScore: 99999, badge: Badge.legend),
-    User(username: "asdf", highScore: 3123, badge: Badge.pro),
-    User(username: "a23e", highScore: 1023, badge: Badge.pro),
-    User(username: "23!d", highScore: 5123, badge: Badge.master),
+    User(username: "Hello world:)))", highScore: 900000, badge: Badge.legend),
+    User(username: "asdf", highScore: 3000, badge: Badge.pro),
+    User(username: "a23e", highScore: 1000, badge: Badge.pro),
+    User(username: "23!d", highScore: 5200, badge: Badge.master),
     User(username: "player", highScore: 100, badge: .empty),
-    User(username: "dd", highScore: 10222, badge: Badge.legend),
-    User(username: "tun", highScore: 1001, badge: Badge.pro),
-    User(username: "kha", highScore: 932, badge: .empty),
-    User(username: "fdffd", highScore: 102, badge: .empty),
+    User(username: "dd", highScore: 10000, badge: Badge.legend),
+    User(username: "tun", highScore: 1000, badge: Badge.pro),
+    User(username: "kha", highScore: 990, badge: .empty),
+    User(username: "fdffd", highScore: 100, badge: .empty),
 ]
 
 

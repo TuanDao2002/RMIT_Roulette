@@ -15,6 +15,7 @@ struct ContentView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("isUseSystem") private var isUseSystem = false
+    @AppStorage("level") private var level: Level = Level.easy
     
     var body: some View {
         NavigationView {
@@ -31,7 +32,7 @@ struct ContentView: View {
                         .modifier(ButtonModifier())
                     NavigateButtonView(destinationView: HowToPlay(backToMenu: true), buttonName: "How to play", changeBackgroundMusic: false, customBackButton: true)
                         .modifier(ButtonModifier())
-                    NavigateButtonView(destinationView: SettingView(isDarkMode: $isDarkMode, isUseSystem: $isUseSystem), buttonName: "Setting", changeBackgroundMusic: false, customBackButton: false)
+                    NavigateButtonView(destinationView: SettingView(isDarkMode: $isDarkMode, isUseSystem: $isUseSystem, level: $level), buttonName: "Setting", changeBackgroundMusic: false, customBackButton: false)
                         .modifier(ButtonModifier())
                 }
             }

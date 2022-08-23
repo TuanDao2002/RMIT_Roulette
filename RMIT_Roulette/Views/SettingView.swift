@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SettingView: View {
     
-    @Binding var isDarkMode:Bool
-    @Binding var isUseSystem:Bool
-    
+    @Binding var isDarkMode: Bool
+    @Binding var isUseSystem: Bool
+    @Binding var level: Level
+        
     var body: some View {
         NavigationView {
             Form {
@@ -28,6 +29,15 @@ struct SettingView: View {
                         SystemThemeManager.shared.handleTheme(darkMode: isDarkMode, system: isUseSystem)
                     })
                 }
+                
+                Section(header: Text("Difficulty level")) {
+                    Picker(selection: $level, label: Text("Select an option:")) {
+                        Text("Easy").tag(Level.easy)
+                        Text("Medium").tag(Level.medium)
+                        Text("Hard").tag(Level.hard)
+                    }
+                    .pickerStyle(.inline)
+                }
             }
         }
     }
@@ -35,6 +45,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(isDarkMode: .constant(false), isUseSystem: .constant(false))
+        SettingView(isDarkMode: .constant(false), isUseSystem: .constant(false), level: .constant(Level.empty))
     }
 }
