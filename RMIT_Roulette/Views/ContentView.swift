@@ -26,7 +26,7 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 900, minHeight: 215, alignment: .center)
-                    NavigateButtonView(destinationView: GameView(userVM: userVM), buttonName: "Play game", changeBackgroundMusic: true, customBackButton: true)
+                    NavigateButtonView(destinationView: GameView(userVM: userVM, level: $level), buttonName: "Play game", changeBackgroundMusic: true, customBackButton: true)
                         .modifier(ButtonModifier())
                     NavigateButtonView(destinationView: Leaderboard(userVM: userVM), buttonName: "Leaderboard", changeBackgroundMusic: false, customBackButton: true)
                         .modifier(ButtonModifier())
@@ -41,7 +41,7 @@ struct ContentView: View {
         .navigationViewStyle(StackNavigationViewStyle())
 
         .onAppear(perform: {
-//            playSound(sound: "background_music_menu", type: "mp3", loop: true)
+            playSound(sound: "background_music_menu", type: "mp3", loop: true)
             SystemThemeManager.shared.handleTheme(darkMode: isDarkMode, system: isUseSystem)
         })
         

@@ -55,6 +55,7 @@ struct RegisterView: View {
         
         .overlay(
             Button(action: {
+                playSound(sound: "background_music_menu", type: "mp3", loop: true)
                 dismiss()
             }) {
               Image(systemName: "house.circle")
@@ -64,7 +65,7 @@ struct RegisterView: View {
             alignment: .top
         )
         
-        .frame(minWidth: 280, idealWidth: 280, maxWidth: 320, minHeight: 200, idealHeight: 350, maxHeight: 270, alignment: .center)
+        .frame(minWidth: 250, idealWidth: 280, maxWidth: 320, minHeight: 200, idealHeight: 350, maxHeight: 370, alignment: .center)
         .cornerRadius(15)
     }
 }
@@ -72,6 +73,6 @@ struct RegisterView: View {
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         Text("")
-//        RegisterView(showRegister: .constant(true), userVM: UserViewModel())
+//        RegisterView(dismiss: DismissAction, showRegister: .constant(true), userVM: UserViewModel())
     }
 }

@@ -36,6 +36,7 @@ struct SettingView: View {
                         Text("Medium").tag(Level.medium)
                         Text("Hard").tag(Level.hard)
                     }
+                    .labelsHidden()
                     .pickerStyle(.inline)
                 }
             }

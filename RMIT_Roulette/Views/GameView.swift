@@ -32,7 +32,7 @@ struct GameView: View {
     @State private var colorValue: ColorRoulette = .green
     
     @State private var sectorsToBet: [RouletteSector] = []
-    @State private var level: Level
+    @Binding var level: Level
     @State private var numOfSectorsToBet: Int = 0
     
     @State private var yourMoney: Int = 1000
@@ -40,9 +40,7 @@ struct GameView: View {
 
     @State private var highScore: Int = 0
     @State private var bonusScore: Int = 0
-//    @AppStorage("yourMoney") var yourMoney: Int = 1000
-//    @AppStorage("highScore") var highScore: Int = 0
-
+    
     @State private var resultStatus: ResultStatus = .SM
     @State private var statusAppear = false
     
@@ -54,10 +52,10 @@ struct GameView: View {
         }
     }
     
-    init(userVM: UserViewModel) {
+    init(userVM: UserViewModel, level: Binding<Level>) {
         self.userVM = userVM
+        self._level = level
         self.currentWorkItem = workItem()
-//        self.level = level
     }
     
     let halfSector = 360.0 / 37.0 / 2.0
@@ -400,7 +398,7 @@ struct GameView: View {
         )
         
         .onAppear(perform: {
-//            playSound(sound: "background_music_casino", type: "mp3", loop: true)
+            playSound(sound: "background_music_casino", type: "mp3", loop: true)
         })
         
         .onChange(of: scenePhase) { newPhase in
@@ -523,7 +521,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        Text("Hello")
-//        GameView(userVM: UserViewModel(), level: Level.easy)
+        GameView(userVM: UserViewModel(), level: .constant(Level.easy))
     }
 }
