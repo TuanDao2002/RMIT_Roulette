@@ -69,10 +69,3 @@ struct RegisterView: View {
         .cornerRadius(15)
     }
 }
-
-struct RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("")
-//        RegisterView(dismiss: DismissAction, showRegister: .constant(true), userVM: UserViewModel())
-    }
-}

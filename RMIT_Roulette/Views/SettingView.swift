@@ -41,6 +41,7 @@ struct SettingView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 
