@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ResumeView: View {
     
+    @State private var spinDegress: Double = 0
+    
     var body: some View {
         ZStack {
             Color("ColorBlue")
@@ -25,6 +27,14 @@ struct ResumeView: View {
                 Image("roulette_wheel")
                     .resizable()
                     .scaledToFit()
+                    .rotationEffect(Angle(degrees: spinDegress))
+                    .onAppear(perform: {
+                        withAnimation(Animation.linear(duration: 5)
+                            .repeatForever(autoreverses: false)) {
+                                spinDegress = 720
+                            }
+                        }
+                    )
                 
                 Button(action: {
                     
