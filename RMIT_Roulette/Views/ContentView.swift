@@ -16,6 +16,7 @@ struct ContentView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("isUseSystem") private var isUseSystem = false
     @AppStorage("level") private var level: Level = Level.easy
+    @AppStorage("resume") private var resume: Bool = false
     
     var body: some View {
         NavigationView {
@@ -35,8 +36,12 @@ struct ContentView: View {
                     NavigateButtonView(destinationView: SettingView(isDarkMode: $isDarkMode, isUseSystem: $isUseSystem, level: $level), buttonName: "Setting", changeBackgroundMusic: false, customBackButton: false)
                         .modifier(ButtonModifier())
                 }
+                .modifier(BlurViewWhenResumeAppear(resume: resume))
+                
+                if (resume) {
+                    ResumeView(destinationView: GameView(userVM: userVM, level: $level), resume: $resume)
+                }
             }
-    
         }
         .navigationViewStyle(StackNavigationViewStyle())
 
@@ -49,6 +54,7 @@ struct ContentView: View {
             if newPhase == .active {
                 playSound(sound: "background_music_menu", type: "mp3", loop: true)
             } else if newPhase == .inactive || newPhase == .background {
+                resume = true
                 emptySound()
             }
         }

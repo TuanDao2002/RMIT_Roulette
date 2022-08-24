@@ -19,6 +19,7 @@ func playSound(sound: String, type: String, loop: Bool) {
         if (loop) {
             audioPlayer?.numberOfLoops = -1
             if (arrayOfPlayers.count > 0) {
+                if (arrayOfPlayers[0].url == url) {return}
                 arrayOfPlayers[0] = audioPlayer!
             } else {
                 arrayOfPlayers.append(audioPlayer!)

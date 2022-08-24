@@ -7,9 +7,16 @@
 
 import SwiftUI
 
-struct ResumeView: View {
+struct ResumeView<Content: View>: View {
     
+    private var destinationView: Content
     @State private var spinDegress: Double = 0
+    @Binding var resume: Bool
+    
+    init(destinationView: Content, resume: Binding<Bool>) {
+        self.destinationView = destinationView
+        self._resume = resume
+    }
     
     var body: some View {
         ZStack {
@@ -17,7 +24,7 @@ struct ResumeView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 5) {
                 Button(action: {
-                    
+                    resume = false
                 }) {
                     Image(systemName: "house.circle")
                       .foregroundColor(Color("ColorYellow"))
@@ -28,22 +35,20 @@ struct ResumeView: View {
                     .resizable()
                     .scaledToFit()
                     .rotationEffect(Angle(degrees: spinDegress))
-                    .onAppear(perform: {
-                        withAnimation(Animation.linear(duration: 5)
-                            .repeatForever(autoreverses: false)) {
-                                spinDegress = 720
-                            }
-                        }
-                    )
-                
-                Button(action: {
-                    
-                }) {
-                    Text("Resume")
-                }
-                .modifier(ButtonModifier())
+
+                NavigateButtonView(destinationView: destinationView, buttonName: "Resume", changeBackgroundMusic: true, customBackButton: true)
+                    .modifier(ButtonModifier())
             }
         }
+        .onAppear{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(Animation.linear(duration: 5)
+                    .repeatForever(autoreverses: false)) {
+                        spinDegress = 720
+                    }
+            }
+        }
+        
         .frame(minWidth: 250, idealWidth: 280, maxWidth: 290, minHeight: 120, idealHeight: 220, maxHeight: 400, alignment: .center)
         .cornerRadius(15)
     }
@@ -51,6 +56,6 @@ struct ResumeView: View {
 
 struct ResumeView_Previews: PreviewProvider {
     static var previews: some View {
-        ResumeView()
+        ResumeView(destinationView: HowToPlay(backToMenu: true), resume: .constant(true))
     }
 }

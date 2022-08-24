@@ -86,6 +86,15 @@ struct BlurViewWhenRegisterAppear: ViewModifier {
     }
 }
 
+struct BlurViewWhenResumeAppear: ViewModifier {
+    var resume: Bool
+    func body(content: Content) -> some View {
+        content
+            .blur(radius: resume ? 5 : 0 , opaque: false)
+            .allowsHitTesting(!resume)
+    }
+}
+
 struct IconModifier: ViewModifier {
     func body(content: Content) -> some View {
         content

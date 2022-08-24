@@ -33,6 +33,7 @@ struct GameView: View {
     
     @State private var sectorsToBet: [RouletteSector] = []
     @Binding var level: Level
+    
     @State private var numOfSectorsToBet: Int = 0
     
     @State private var yourMoney: Int = 1000
