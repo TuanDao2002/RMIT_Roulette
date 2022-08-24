@@ -27,7 +27,7 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 900, minHeight: 215, alignment: .center)
-                    NavigateButtonView(destinationView: GameView(userVM: userVM, level: $level), buttonName: "Play game", changeBackgroundMusic: true, customBackButton: true)
+                    NavigateButtonView(destinationView: GameView(userVM: userVM, level: $level, resume: $resume), buttonName: "Play game", changeBackgroundMusic: true, customBackButton: true)
                         .modifier(ButtonModifier())
                     NavigateButtonView(destinationView: Leaderboard(userVM: userVM), buttonName: "Leaderboard", changeBackgroundMusic: false, customBackButton: true)
                         .modifier(ButtonModifier())
@@ -39,7 +39,7 @@ struct ContentView: View {
                 .modifier(BlurViewWhenResumeAppear(resume: resume))
                 
                 if (resume) {
-                    ResumeView(destinationView: GameView(userVM: userVM, level: $level), resume: $resume)
+                    ResumeView(destinationView: GameView(userVM: userVM, level: $level, resume: $resume), resume: $resume)
                 }
             }
         }
@@ -54,7 +54,6 @@ struct ContentView: View {
             if newPhase == .active {
                 playSound(sound: "background_music_menu", type: "mp3", loop: true)
             } else if newPhase == .inactive || newPhase == .background {
-                resume = true
                 emptySound()
             }
         }

@@ -8,15 +8,15 @@
 import Foundation
 
 let mockUsers = [
-    User(username: "Hello world:)))", highScore: 900000, badge: Badge.legend),
-    User(username: "asdf", highScore: 3000, badge: Badge.pro),
-    User(username: "a23e", highScore: 1000, badge: Badge.pro),
-    User(username: "23!d", highScore: 5200, badge: Badge.master),
-    User(username: "player", highScore: 100, badge: .empty),
-    User(username: "dd", highScore: 10000, badge: Badge.legend),
-    User(username: "tun", highScore: 1000, badge: Badge.pro),
-    User(username: "kha", highScore: 990, badge: .empty),
-    User(username: "fdffd", highScore: 100, badge: .empty),
+    User(username: "Hello world:)))", yourMoney: 0, highScore: 900000, badge: Badge.legend),
+    User(username: "asdf", yourMoney: 0, highScore: 3000, badge: Badge.pro),
+    User(username: "a23e", yourMoney: 0, highScore: 1000, badge: Badge.pro),
+    User(username: "23!d", yourMoney: 0,  highScore: 5200, badge: Badge.master),
+    User(username: "player", yourMoney: 0, highScore: 100, badge: .empty),
+    User(username: "dd", yourMoney: 0, highScore: 10000, badge: Badge.legend),
+    User(username: "tun", yourMoney: 0, highScore: 1000, badge: Badge.pro),
+    User(username: "kha", yourMoney: 0, highScore: 990, badge: .empty),
+    User(username: "fdffd", yourMoney: 0, highScore: 100, badge: .empty),
 ]
 
 
@@ -25,9 +25,9 @@ final class UserViewModel: ObservableObject {
     
     init() {
         // populate UserDefault with mock data
-        for user in mockUsers {
-            self.add(newUser: user)
-        }
+//        for user in mockUsers {
+//            self.add(newUser: user)
+//        }
         
         load()
     }
@@ -44,13 +44,13 @@ final class UserViewModel: ObservableObject {
     }
     
     func getCurrentUser() -> User {
-        if (users.count == 0) { return User(username: "", highScore: -1, badge: .empty)}
+        if (users.count == 0) { return User(username: "", yourMoney: 0, highScore: -1, badge: .empty)}
         let lastIndex = users.count - 1
         return users[lastIndex]
     }
     
-    func updateCurrentUser(highScore: Int, badge: Badge) {
-        users[users.count - 1] = User(username: getCurrentUser().username, highScore: highScore, badge: badge)
+    func updateCurrentUser(yourMoney: Int, highScore: Int, badge: Badge) {
+        users[users.count - 1] = User(username: getCurrentUser().username, yourMoney: yourMoney, highScore: highScore, badge: badge)
         UserDefaults.standard.set(try? PropertyListEncoder().encode(users), forKey: "users")
     }
     

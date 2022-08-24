@@ -20,7 +20,7 @@ struct GameView: View {
     @State private var rand = 0.0
     @State private var newAngle = 0.0
 
-    @State var showRegister = true
+    @State var showRegister: Bool = false
     @State var showAchievement = false
     @State private var newBadge: Badge = .empty
     @State private var showInput = false
@@ -33,6 +33,7 @@ struct GameView: View {
     
     @State private var sectorsToBet: [RouletteSector] = []
     @Binding var level: Level
+    @Binding var resume: Bool
     
     @State private var numOfSectorsToBet: Int = 0
     
@@ -53,9 +54,28 @@ struct GameView: View {
         }
     }
     
-    init(userVM: UserViewModel, level: Binding<Level>) {
+    init(userVM: UserViewModel, level: Binding<Level>, resume: Binding<Bool>) {
         self.userVM = userVM
         self._level = level
+        self._resume = resume
+                
+        if (self.resume) {
+            _showRegister = State(initialValue: false)
+        } else {
+            _showRegister = State(initialValue: true)
+        }
+        
+        if (!showRegister) {
+            let currentUser = userVM.getCurrentUser()
+            _highScore = State(initialValue: currentUser.highScore)
+            
+            if (currentUser.yourMoney <= 0) {
+                userVM.updateCurrentUser(yourMoney: 1000, highScore: currentUser.highScore, badge: currentUser.badge)
+            }
+            
+            _yourMoney = State(initialValue: userVM.getCurrentUser().yourMoney)
+        }
+        
         self.currentWorkItem = workItem()
     }
     
@@ -251,7 +271,7 @@ struct GameView: View {
             showAchievement = true
         }
         
-        userVM.updateCurrentUser(highScore: highScore, badge: newBadge)
+        userVM.updateCurrentUser(yourMoney: yourMoney, highScore: highScore, badge: newBadge)
         
         if (yourMoney <= 0) {
             yourMoney = 0
@@ -373,6 +393,7 @@ struct GameView: View {
                 AudioServicesPlaySystemSound(1306)
                 emptySound()
                 playSound(sound: "background_music_menu", type: "mp3", loop: true)
+                resume = true
                 currentWorkItem.cancel()
                 dismiss()
             }) {
@@ -414,6 +435,11 @@ struct GameView: View {
                 newAngle = 0
                 spinDegrees = 0
                 currentWorkItem.cancel()
+                
+                if (!showRegister) {
+                    resume = true
+                }
+                
                 emptySound()
             }
         }
@@ -421,6 +447,7 @@ struct GameView: View {
         .alert(alertContent, isPresented: $showingAlert) {
             Button("Back to home", role: .destructive) {
                 playSound(sound: "background_music_menu", type: "mp3", loop: true)
+                resume = false
                 dismiss()
             }
             
@@ -522,6 +549,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(userVM: UserViewModel(), level: .constant(Level.easy))
+        GameView(userVM: UserViewModel(), level: .constant(Level.easy), resume: .constant(true))
     }
 }

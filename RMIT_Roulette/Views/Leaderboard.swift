@@ -29,7 +29,7 @@ struct Leaderboard: View {
                         .fontWeight(.bold)
                     
                     ForEach(0..<users.count, id: \.self) { index in
-                        LeaderboardRow(user: users[index], rank: index < 10 ? index + 1 : index + 100)
+                        LeaderboardRow(user: users[index], rank: index + 1)
                     }
                 }
                 .padding(.bottom, UIDevice.current.userInterfaceIdiom == .phone ? 45 : 65)

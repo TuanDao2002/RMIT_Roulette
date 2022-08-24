@@ -37,14 +37,14 @@ struct RegisterView: View {
                     .opacity(showError ? 1 : 0)
                 
                 Button(action: {
-                    if (username.isEmpty) {
+                    if (username.trimmingCharacters(in: .whitespaces).isEmpty) {
                         showError = true
                         return
                     } else {
                         showError = false
                     }
                     
-                    userVM.add(newUser: User(username: username, highScore: 0, badge: .empty))
+                    userVM.add(newUser: User(username: username, yourMoney: 1000, highScore: 0, badge: .empty))
                     self.showRegister = false
                 }) {
                     Text("Register")

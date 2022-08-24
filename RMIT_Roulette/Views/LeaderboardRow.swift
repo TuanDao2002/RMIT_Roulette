@@ -73,7 +73,7 @@ struct LeaderboardRow: View {
 
 struct LeaderboardRow_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardRow(user: User(username: "Hello worldfffffffffffffffffffffffffff:))))", highScore: 10000, badge: Badge.pro), rank: 4)
+        LeaderboardRow(user: User(username: "Hello worldfffffffffffffffffffffffffff:))))", yourMoney: 0, highScore: 10000, badge: Badge.pro), rank: 4)
             .preferredColorScheme(.dark)
     }
 }
