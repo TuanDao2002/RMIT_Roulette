@@ -50,7 +50,7 @@ struct GameView: View {
     private func workItem() -> DispatchWorkItem {
         return DispatchWorkItem {
             isAnimating = false
-            checkWinning(newAngle: newAngle)
+            checkWinning(newAngle: newAngle, statusAppear: &statusAppear, bonusMoney: &bonusMoney, bonusScore: &bonusScore, sectorsToBet: &sectorsToBet, resultStatus: &resultStatus, level: level, yourMoney: &yourMoney, highScore: &highScore, newBadge: &newBadge, userVM: userVM, showAchievement: &showAchievement, showingAlert: &showingAlert, alertContent: &alertContent)
         }
     }
     
@@ -79,8 +79,8 @@ struct GameView: View {
         self.currentWorkItem = workItem()
     }
     
-    let halfSector = 360.0 / 37.0 / 2.0
-    let sectors: [RouletteSector] = RouletteSectorsViewModel.get()
+//    let halfSector = 360.0 / 37.0 / 2.0
+//    let sectors: [RouletteSector] = RouletteSectorsViewModel.get()
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible()),
@@ -90,6 +90,7 @@ struct GameView: View {
             GridItem(.flexible())
         ]
     
+    /*
     var spinAnimation: Animation {
         Animation.easeOut(duration: 5.0)
             .repeatCount(1, autoreverses: false)
@@ -190,13 +191,16 @@ struct GameView: View {
         .multilineTextAlignment(.center)
         .padding()
     }
+     */
     
+    /*
     func displaySectors(sectors: [RouletteSector]) -> [RouletteSector] {
         var customSector = sectors
         customSector.removeLast()
         return customSector.sorted(by: {$0.number < $1.number})
     }
-    
+     */
+    /*
     func displayEachSector(sector: RouletteSector) -> some View {
         return Button(action: {
             AudioServicesPlaySystemSound(1306)
@@ -221,7 +225,8 @@ struct GameView: View {
                 .cornerRadius(200)
         }
     }
-    
+    */
+    /*
     func checkWinning(newAngle: Double) {
         statusAppear = true
         let resultSector = sectorFromAngle(angle: newAngle)
@@ -281,6 +286,7 @@ struct GameView: View {
             playSound(sound: "game_over", type: "wav", loop: false)
         }
     }
+     */
     
     var body: some View {
         ZStack {
@@ -467,7 +473,7 @@ struct GameView: View {
                 VStack(spacing: 40) {
                     Spacer()
                     if (sectorsToBet.isEmpty) {
-                        displayBetInstruction()
+                        displayBetInstruction(numOfSectorsToBet: numOfSectorsToBet, level: level)
                     } else {
                         HStack {
                             Text("You bet")
@@ -490,10 +496,10 @@ struct GameView: View {
                     }
                     
                     VStack {
-                        displayEachSector(sector: sectors[sectors.count - 1])
+                        displayEachSector(sector: sectors[sectors.count - 1], handler: {validateSectorInput(sector: sectors[sectors.count - 1], sectorsToBet: &sectorsToBet, level: level)})
                         LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(displaySectors(sectors: sectors), id: \.self) { sector in
-                                displayEachSector(sector: sector)
+                                displayEachSector(sector: sector, handler: {validateSectorInput(sector: sector, sectorsToBet: &sectorsToBet, level: level)})
                             }
                         }
                     }
@@ -539,7 +545,7 @@ struct GameView: View {
                   Image(systemName: "xmark.circle")
                     .font(.title)
                 }
-                    .foregroundColor(Color("ColorYellow"))
+                .foregroundColor(Color("ColorYellow"))
                 .padding(.top, 30)
                 .padding(.trailing, 20), alignment: .topTrailing
             )

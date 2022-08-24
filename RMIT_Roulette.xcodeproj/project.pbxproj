@@ -35,6 +35,7 @@
 		A4D8A2B728A942E600DEEF3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4D8A2B628A942E600DEEF3A /* Preview Assets.xcassets */; };
 		A4D8A2C528A94CEE00DEEF3A /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2C428A94CEE00DEEF3A /* Modifiers.swift */; };
 		A4D8A2C728A94D0400DEEF3A /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2C628A94D0400DEEF3A /* PlaySound.swift */; };
+		A4DAD38428B668A3002918F5 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DAD38328B668A3002918F5 /* GameLogic.swift */; };
 		A4E03FDE28B12C99000C27DA /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E03FDD28B12C99000C27DA /* MilestoneView.swift */; };
 		A4E03FE128B13B4F000C27DA /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E03FE028B13B4F000C27DA /* Badge.swift */; };
 		A4E03FE328B13BA8000C27DA /* ColorRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E03FE228B13BA8000C27DA /* ColorRoulette.swift */; };
@@ -71,6 +72,7 @@
 		A4D8A2B628A942E600DEEF3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A4D8A2C428A94CEE00DEEF3A /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		A4D8A2C628A94D0400DEEF3A /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		A4DAD38328B668A3002918F5 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		A4E03FDD28B12C99000C27DA /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
 		A4E03FE028B13B4F000C27DA /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		A4E03FE228B13BA8000C27DA /* ColorRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRoulette.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		A4D8A2AE28A942E200DEEF3A /* RMIT_Roulette */ = {
 			isa = PBXGroup;
 			children = (
+				A4DAD38228B66897002918F5 /* Logic */,
 				A453AF2628B22EEA00271D87 /* ViewModel */,
 				A482F06328AFE2A300828891 /* Model */,
 				A4D8A2BF28A94C4900DEEF3A /* Sounds */,
@@ -186,6 +189,14 @@
 				A4A43D3F28AD35B90051D51A /* coin_big_win.wav */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		A4DAD38228B66897002918F5 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A4DAD38328B668A3002918F5 /* GameLogic.swift */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 		A4E03FDF28B13B39000C27DA /* Enum */ = {
@@ -294,6 +305,7 @@
 				A453AF2828B230BB00271D87 /* RouletteSectorsViewModel.swift in Sources */,
 				A49E0E0828A9FCF9004BB2E1 /* HowToPlay.swift in Sources */,
 				A4E03FE528B13BC5000C27DA /* ResultStatus.swift in Sources */,
+				A4DAD38428B668A3002918F5 /* GameLogic.swift in Sources */,
 				A4E03FE328B13BA8000C27DA /* ColorRoulette.swift in Sources */,
 				A4E03FE128B13B4F000C27DA /* Badge.swift in Sources */,
 				A49230B628B330FC00E4D697 /* SystemThemeManager.swift in Sources */,
