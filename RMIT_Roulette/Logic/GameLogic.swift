@@ -164,8 +164,6 @@ func checkWinning(newAngle: Double, statusAppear: inout Bool, bonusMoney: inout 
             bonusScore = bonusScore * 5
         }
 
-//        bonusMoney = bonusMoney
-//        bonusScore = bonusScore
         playSound(sound: "coin_big_win", type: "wav", loop: false)
     } else if (level == Level.easy && sectorsToBet.filter{abs($0.number - resultSector.number) <= 1}.count > 0) {
         resultStatus = .SM

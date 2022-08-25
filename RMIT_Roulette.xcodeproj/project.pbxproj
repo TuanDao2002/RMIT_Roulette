@@ -30,7 +30,7 @@
 		A4A43D4628AD3DA00051D51A /* roulette_spin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4A43D4528AD3DA00051D51A /* roulette_spin.mp3 */; };
 		A4C5825128AE96F0008B184B /* game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4C5825028AE96F0008B184B /* game_over.wav */; };
 		A4D8A2B028A942E200DEEF3A /* RMIT_RouletteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2AF28A942E200DEEF3A /* RMIT_RouletteApp.swift */; };
-		A4D8A2B228A942E200DEEF3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2B128A942E200DEEF3A /* ContentView.swift */; };
+		A4D8A2B228A942E200DEEF3A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2B128A942E200DEEF3A /* MenuView.swift */; };
 		A4D8A2B428A942E600DEEF3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4D8A2B328A942E600DEEF3A /* Assets.xcassets */; };
 		A4D8A2B728A942E600DEEF3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4D8A2B628A942E600DEEF3A /* Preview Assets.xcassets */; };
 		A4D8A2C528A94CEE00DEEF3A /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8A2C428A94CEE00DEEF3A /* Modifiers.swift */; };
@@ -67,7 +67,7 @@
 		A4C5825028AE96F0008B184B /* game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = game_over.wav; path = ../../../images/game_over.wav; sourceTree = "<group>"; };
 		A4D8A2AC28A942E200DEEF3A /* RMIT_Roulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMIT_Roulette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4D8A2AF28A942E200DEEF3A /* RMIT_RouletteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMIT_RouletteApp.swift; sourceTree = "<group>"; };
-		A4D8A2B128A942E200DEEF3A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A4D8A2B128A942E200DEEF3A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		A4D8A2B328A942E600DEEF3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4D8A2B628A942E600DEEF3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A4D8A2C428A94CEE00DEEF3A /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
@@ -106,6 +106,53 @@
 				A482F06428AFE2B400828891 /* User.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A4B6948028B71891001870FD /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				A47516BB28B4C93800D1789D /* ResumeView.swift */,
+				A49E0E0928A9FF0D004BB2E1 /* NavigateButtonView.swift */,
+				A4D8A2B128A942E200DEEF3A /* MenuView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		A4B6948128B718A0001870FD /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				A43BEB4728B27754005A5A81 /* RegisterView.swift */,
+				A4E03FDD28B12C99000C27DA /* MilestoneView.swift */,
+				A482F05F28AFD5F700828891 /* DotView.swift */,
+				A49E0E0328A9FC85004BB2E1 /* GameView.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		A4B6948228B718C4001870FD /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				A482F06128AFDA6200828891 /* LeaderboardRow.swift */,
+				A49E0E0528A9FCE0004BB2E1 /* Leaderboard.swift */,
+			);
+			path = Leaderboard;
+			sourceTree = "<group>";
+		};
+		A4B6948328B7192B001870FD /* HowToPlay */ = {
+			isa = PBXGroup;
+			children = (
+				A49E0E0728A9FCF9004BB2E1 /* HowToPlay.swift */,
+			);
+			path = HowToPlay;
+			sourceTree = "<group>";
+		};
+		A4B6948428B7194D001870FD /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A49230B528B330FC00E4D697 /* SystemThemeManager.swift */,
+				A49230B328B3302B00E4D697 /* SettingView.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		A4D8A2A328A942E200DEEF3A = {
@@ -151,19 +198,12 @@
 		A4D8A2BD28A94ADB00DEEF3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4B6948428B7194D001870FD /* Setting */,
+				A4B6948328B7192B001870FD /* HowToPlay */,
+				A4B6948228B718C4001870FD /* Leaderboard */,
+				A4B6948128B718A0001870FD /* Game */,
+				A4B6948028B71891001870FD /* Menu */,
 				A4E03FDF28B13B39000C27DA /* Enum */,
-				A4D8A2B128A942E200DEEF3A /* ContentView.swift */,
-				A49E0E0328A9FC85004BB2E1 /* GameView.swift */,
-				A49E0E0528A9FCE0004BB2E1 /* Leaderboard.swift */,
-				A49E0E0728A9FCF9004BB2E1 /* HowToPlay.swift */,
-				A49E0E0928A9FF0D004BB2E1 /* NavigateButtonView.swift */,
-				A482F05F28AFD5F700828891 /* DotView.swift */,
-				A482F06128AFDA6200828891 /* LeaderboardRow.swift */,
-				A4E03FDD28B12C99000C27DA /* MilestoneView.swift */,
-				A43BEB4728B27754005A5A81 /* RegisterView.swift */,
-				A49230B328B3302B00E4D697 /* SettingView.swift */,
-				A49230B528B330FC00E4D697 /* SystemThemeManager.swift */,
-				A47516BB28B4C93800D1789D /* ResumeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,7 +330,7 @@
 				A482F06228AFDA6200828891 /* LeaderboardRow.swift in Sources */,
 				A49230B428B3302B00E4D697 /* SettingView.swift in Sources */,
 				A4E03FDE28B12C99000C27DA /* MilestoneView.swift in Sources */,
-				A4D8A2B228A942E200DEEF3A /* ContentView.swift in Sources */,
+				A4D8A2B228A942E200DEEF3A /* MenuView.swift in Sources */,
 				A49E0E0628A9FCE0004BB2E1 /* Leaderboard.swift in Sources */,
 				A482F06028AFD5F700828891 /* DotView.swift in Sources */,
 				A49E0E0A28A9FF0D004BB2E1 /* NavigateButtonView.swift in Sources */,

@@ -8,7 +8,7 @@
 import SwiftUI
 import AudioToolbox
 
-struct ContentView: View {
+struct MenuView: View {
     @EnvironmentObject var userVM: UserViewModel
     @Environment(\.scenePhase) var scenePhase
     @State var isLinkActive = false
@@ -60,9 +60,9 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MenuView()
             .environmentObject(UserViewModel())
     }
 }

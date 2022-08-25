@@ -12,7 +12,7 @@ struct RMIT_RouletteApp: App {
     var userVM = UserViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MenuView()
                 .environmentObject(userVM)
         }
     }

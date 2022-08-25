@@ -36,7 +36,7 @@ struct ResumeView<Content: View>: View {
                     .scaledToFit()
                     .rotationEffect(Angle(degrees: spinDegress))
 
-                NavigateButtonView(destinationView: destinationView, buttonName: "Resume", changeBackgroundMusic: true, customBackButton: true)
+                NavigateButtonView(destinationView: destinationView, buttonName: "Continue", changeBackgroundMusic: true, customBackButton: true)
                     .modifier(ButtonModifier())
             }
         }
