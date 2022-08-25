@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View to display the badge user has achieved
 struct MilestoneView: View {
     @Binding var showAchievement: Bool
     var badge: Badge

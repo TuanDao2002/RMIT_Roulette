@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View to change the theme mode and difficulty level
 struct SettingView: View {
     
     @Binding var isDarkMode: Bool
@@ -15,6 +16,7 @@ struct SettingView: View {
         
     var body: some View {
         NavigationView {
+            // toggles to change the theme to dark mode or light mode or use the default theme mode of the device's system
             Form {
                 Section(header: Text("Display Settings")) {
                     Toggle(isOn: $isDarkMode, label: {
@@ -30,6 +32,7 @@ struct SettingView: View {
                     })
                 }
                 
+                // choose a difficulty level to play
                 Section(header: Text("Difficulty level")) {
                     Picker(selection: $level, label: Text("Select an option:")) {
                         Text("Easy").tag(Level.easy)

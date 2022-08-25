@@ -7,6 +7,7 @@
 
 import Foundation
 
+// enum for the color of roulette sectors
 enum ColorRoulette: String {
     case red = "RED"
     case black = "BLACK"

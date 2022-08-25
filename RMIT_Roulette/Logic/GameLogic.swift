@@ -13,16 +13,19 @@ import AVFoundation
 let halfSector = 360.0 / 37.0 / 2.0
 let sectors: [RouletteSector] = RouletteSectorsViewModel.get()
 
+// spin animation for the roulette wheel
 var spinAnimation: Animation {
     Animation.easeOut(duration: 5.0)
         .repeatCount(1, autoreverses: false)
 }
 
+// re-calculate the angle to get the result sector
 func getAngle(angle: Double) -> Double {
     let deg = 360 - angle.truncatingRemainder(dividingBy: 360)
     return deg
 }
 
+// set the color of the input sector
 func returnColor(sector: RouletteSector) -> Color {
     let fontColor: Color
     if (sector.color.rawValue == "RED") {
@@ -36,6 +39,7 @@ func returnColor(sector: RouletteSector) -> Color {
     return fontColor
 }
 
+// get the result sector based on the spinned angle of the roulette wheel
 func sectorFromAngle(angle: Double) -> RouletteSector {
     var i = 0
     var sector: RouletteSector = RouletteSector(number: -1, color: .empty)
@@ -53,6 +57,7 @@ func sectorFromAngle(angle: Double) -> RouletteSector {
     return sector
 }
 
+// display the result sector on the Game View
 func displayResultSector(angle: Double) -> some View {
     var sector = sectorFromAngle(angle: angle)
     
@@ -73,6 +78,7 @@ func displayResultSector(angle: Double) -> some View {
     return numberValue + colorValue
 }
 
+// the animation text indicates the roulette is spinning
 func spinningText() -> some View {
     return HStack {
         Text("SPINING")
@@ -85,6 +91,7 @@ func spinningText() -> some View {
     }
 }
 
+// display the instructions on how to bet based on the difficulty level
 func displayBetInstruction(numOfSectorsToBet: Int, level: Level) -> some View {
     let inputText = Text("Choose \(numOfSectorsToBet) values to bet")
         .foregroundColor(Color("ColorYellow"))
@@ -114,12 +121,14 @@ func displayBetInstruction(numOfSectorsToBet: Int, level: Level) -> some View {
     .padding()
 }
 
+// display all the sectors user can bet
 func displaySectors(sectors: [RouletteSector]) -> [RouletteSector] {
     var customSector = sectors
     customSector.removeLast()
     return customSector.sorted(by: {$0.number < $1.number})
 }
 
+// validate the sectors users bet
 func validateSectorInput(sector: RouletteSector, sectorsToBet: inout [RouletteSector], level: Level) {
     if (level == Level.easy) {
         if (sectorsToBet.count < 6 && !sectorsToBet.contains(sector)) {
@@ -136,6 +145,7 @@ func validateSectorInput(sector: RouletteSector, sectorsToBet: inout [RouletteSe
     }
 }
 
+// display each sector user can bet and allow them to choose a sector to bet
 func displayEachSector(sector: RouletteSector, handler: @escaping () -> Void) -> some View {
     return Button(action: {
         AudioServicesPlaySystemSound(1306)
@@ -149,7 +159,7 @@ func displayEachSector(sector: RouletteSector, handler: @escaping () -> Void) ->
     }
 }
 
-
+// function to check if the users win and bonuse money and score users can gain
 func checkWinning(newAngle: Double, statusAppear: inout Bool, bonusMoney: inout Int, bonusScore: inout Int, sectorsToBet: inout [RouletteSector], resultStatus: inout ResultStatus, level: Level, yourMoney: inout Int, highScore: inout Int, newBadge: inout Badge, userVM: UserViewModel, showAchievement: inout Bool, showingAlert: inout Bool, alertContent: inout String) {
     statusAppear = true
     let resultSector = sectorFromAngle(angle: newAngle)

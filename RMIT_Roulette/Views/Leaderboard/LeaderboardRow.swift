@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// view to display the ranking, username, highscore and badge (if exist) of a user
 struct LeaderboardRow: View {
     var user: User
     var rank: Int

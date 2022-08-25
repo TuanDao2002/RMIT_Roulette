@@ -7,6 +7,7 @@
 
 import Foundation
 
+// the model for roulette sector
 struct RouletteSector: Equatable, Hashable {
     var number: Int
     let color: ColorRoulette

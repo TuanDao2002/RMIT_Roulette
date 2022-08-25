@@ -7,6 +7,7 @@
 
 import Foundation
 
+// View Model to return all of the sectors of roulette wheel
 class RouletteSectorsViewModel {
     class func get() -> [RouletteSector] {
         return  [RouletteSector(number: 32, color: .red),

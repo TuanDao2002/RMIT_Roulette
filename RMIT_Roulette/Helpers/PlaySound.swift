@@ -10,10 +10,12 @@ import AVFoundation
 var audioPlayer: AVAudioPlayer?
 var arrayOfPlayers = [AVAudioPlayer]()
 
+// function to play sound effects and background musics
 func playSound(sound: String, type: String, loop: Bool) {
     let path = Bundle.main.path(forResource: sound, ofType: type)!
     let url = URL(fileURLWithPath: path)
 
+    // change background music if needed
     do {
         audioPlayer = try AVAudioPlayer(contentsOf: url)
         if (loop) {
@@ -30,6 +32,7 @@ func playSound(sound: String, type: String, loop: Bool) {
             return
         }
         
+        // can play multiple sounds at once
         try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
         try AVAudioSession.sharedInstance().setActive(true)
         
@@ -41,6 +44,7 @@ func playSound(sound: String, type: String, loop: Bool) {
     }
 }
 
+// empty and stop all sounds to play new sounds
 func emptySound() {
     for player in arrayOfPlayers {
         player.stop()

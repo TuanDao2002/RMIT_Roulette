@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Modifier for growing animation when button is clicked
 struct GrowingButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -19,6 +20,7 @@ struct GrowingButton: ButtonStyle {
     }
 }
 
+// Modifier for button style
 struct ButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -29,6 +31,7 @@ struct ButtonModifier: ViewModifier {
     }
 }
 
+// Modifier for oval text field for user input
 struct OvalTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
@@ -42,6 +45,7 @@ struct OvalTextFieldStyle: TextFieldStyle {
     }
 }
 
+// Modifier for the money and high score status of user
 struct StatusTextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -57,6 +61,7 @@ struct StatusTextFieldModifier: ViewModifier {
     }
 }
 
+// Modifier for the bonus users gain while playing the game
 struct ShowBonus: ViewModifier {
     var bonus: Int
     var statusAppear: Bool
@@ -68,6 +73,7 @@ struct ShowBonus: ViewModifier {
     }
 }
 
+// Modifier to blur the view when mileston view appears
 struct BlurViewWhenMilestoneAppear: ViewModifier {
     var showAchievement: Bool
     func body(content: Content) -> some View {
@@ -77,6 +83,7 @@ struct BlurViewWhenMilestoneAppear: ViewModifier {
     }
 }
 
+// Modifier to blur the view when register view appears
 struct BlurViewWhenRegisterAppear: ViewModifier {
     var showRegister: Bool
     func body(content: Content) -> some View {
@@ -86,6 +93,7 @@ struct BlurViewWhenRegisterAppear: ViewModifier {
     }
 }
 
+// Modifier to blur the view when resume view appears
 struct BlurViewWhenResumeAppear: ViewModifier {
     var resume: Bool
     func body(content: Content) -> some View {
@@ -95,6 +103,7 @@ struct BlurViewWhenResumeAppear: ViewModifier {
     }
 }
 
+// Modifier for icon style
 struct IconModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -105,6 +114,7 @@ struct IconModifier: ViewModifier {
     }
 }
 
+// Modifier for bottom home navigation
 struct AddBottomBarModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -116,6 +126,7 @@ struct AddBottomBarModifier: ViewModifier {
     }
 }
 
+// Modifier for X mark
 struct AddXMarkModifier: ViewModifier {
     func body(content: Content) -> some View {
         content

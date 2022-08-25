@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View for users to register a username
 struct RegisterView: View {
     var dismiss: DismissAction
 
@@ -37,6 +38,7 @@ struct RegisterView: View {
                     .opacity(showError ? 1 : 0)
                 
                 Button(action: {
+                    // not register new user if the username is empty or contains only whitespaces
                     if (username.trimmingCharacters(in: .whitespaces).isEmpty) {
                         showError = true
                         return

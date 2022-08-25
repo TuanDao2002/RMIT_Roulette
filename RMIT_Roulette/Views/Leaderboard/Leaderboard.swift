@@ -8,6 +8,7 @@
 import SwiftUI
 import AudioToolbox
 
+// View to display all users sorted descending based on their highscores
 struct Leaderboard: View {
     @Environment(\.dismiss) var dismiss
     private var userVM: UserViewModel

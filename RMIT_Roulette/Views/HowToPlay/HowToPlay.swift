@@ -8,6 +8,7 @@
 import SwiftUI
 import AudioToolbox
 
+// a view to display instructions on how to play and every difficulty levels
 struct HowToPlay: View {
     @Environment(\.dismiss) var dismiss
     private var backToMenu = false

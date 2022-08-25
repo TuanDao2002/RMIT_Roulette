@@ -8,6 +8,7 @@
 import SwiftUI
 import AudioToolbox
 
+// View for users to play the game
 struct GameView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.dismiss) var dismiss
@@ -186,11 +187,11 @@ struct GameView: View {
             .modifier(BlurViewWhenMilestoneAppear(showAchievement: showAchievement))
             .modifier(BlurViewWhenRegisterAppear(showRegister: showRegister))
             
-            if (showAchievement) {
+            if (showAchievement) { // show MilestoneView when users reach an achievement
                 MilestoneView(showAchievement: $showAchievement, badge: newBadge)
             }
             
-            if (showRegister) {
+            if (showRegister) { // show RegisterView when users need to register a username
                 RegisterView(dismiss: dismiss, showRegister: $showRegister, userVM: userVM)
             }
         }
@@ -242,7 +243,7 @@ struct GameView: View {
                 spinDegrees = 0
                 currentWorkItem.cancel()
                 
-                if (!showRegister) {
+                if (!showRegister) { // if the users exits the game after registering, the ResumeView will appear at MenuView
                     resume = true
                 }
                 
@@ -267,7 +268,7 @@ struct GameView: View {
             HowToPlay(backToMenu: false)
         }
         
-        .sheet(isPresented: $showInput) {
+        .sheet(isPresented: $showInput) { // sheet to for users to chooses which values to bet
             ZStack {
                 Color("ColorGreen").edgesIgnoringSafeArea(.all)
                 VStack(spacing: 40) {
@@ -307,7 +308,7 @@ struct GameView: View {
                     Button(action: {
                         AudioServicesPlaySystemSound(1306)
 
-                        if (sectorsToBet.count < numOfSectorsToBet) {
+                        if (sectorsToBet.count < numOfSectorsToBet) { // alert users when the users does not choose enough values to bet
                             showingAlert = true
                             alertContent = "You must bet \(numOfSectorsToBet) values"
                             return
@@ -318,12 +319,13 @@ struct GameView: View {
                         showInput = false
                         isAnimating = true
                         rand = Double.random(in: 1...360)
-                        withAnimation(spinAnimation) {
+                        withAnimation(spinAnimation) { // trigger the spinning animation of roulette wheel
                             spinDegrees += 720.0 + rand - rand
                         }
                         newAngle = getAngle(angle: spinDegrees)
                         
                         currentWorkItem = workItem()
+                        // wait until the roulette wheel stop spinning to check for winning and bonus money and scores
                         DispatchQueue.main.asyncAfter(deadline: .now() + 4.9, execute: currentWorkItem)
                     }){
                         Text("BET")

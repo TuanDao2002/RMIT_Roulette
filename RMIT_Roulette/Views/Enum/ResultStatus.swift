@@ -7,6 +7,7 @@
 
 import Foundation
 
+// enum for the result status of users while playing the game
 enum ResultStatus: String {
     case SM = "GOOD JOB 😇"
     case BW = "NICE BET 🥳"

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// the model for user
 struct User: Codable, Hashable {
     var username: String
     var yourMoney: Int

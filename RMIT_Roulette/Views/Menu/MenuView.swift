@@ -8,6 +8,7 @@
 import SwiftUI
 import AudioToolbox
 
+// View to display the menu for users
 struct MenuView: View {
     @EnvironmentObject var userVM: UserViewModel
     @Environment(\.scenePhase) var scenePhase
@@ -23,6 +24,7 @@ struct MenuView: View {
             ZStack {
                 Color("ColorGreen").edgesIgnoringSafeArea(.all)
                 VStack {
+                    // display navigation buttons for users to move to other views
                     Image("roulette_logo")
                         .resizable()
                         .scaledToFit()
@@ -38,7 +40,7 @@ struct MenuView: View {
                 }
                 .modifier(BlurViewWhenResumeAppear(resume: resume))
                 
-                if (resume) {
+                if (resume) { // display the resume view if users exit while playing the game
                     ResumeView(destinationView: GameView(userVM: userVM, level: $level, resume: $resume), resume: $resume)
                 }
             }

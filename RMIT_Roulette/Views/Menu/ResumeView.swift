@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View to allows users to continue the game or back to home menu
 struct ResumeView<Content: View>: View {
     
     private var destinationView: Content

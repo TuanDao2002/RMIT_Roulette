@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// a class to set the theme based on user's input
 class SystemThemeManager {
     
     static let shared = SystemThemeManager()

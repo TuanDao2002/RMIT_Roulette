@@ -7,6 +7,7 @@
 
 import Foundation
 
+// enum for the level users are playing
 enum Level: String, CaseIterable {
     case easy
     case medium

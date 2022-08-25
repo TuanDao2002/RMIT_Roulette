@@ -8,6 +8,7 @@
 import SwiftUI
 import AudioToolbox
 
+// View display navigation buttons to another view
 struct NavigateButtonView<Content: View>: View {
     private var buttonName: String
     private var destinationView: Content

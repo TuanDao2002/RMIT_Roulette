@@ -7,6 +7,7 @@
 
 import Foundation
 
+// enum for achievement badge
 enum Badge: Int, Decodable, Encodable {
     case legend = 10000
     case master = 5000

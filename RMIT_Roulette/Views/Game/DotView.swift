@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View to display 3 dots for waiting animation while the roulette wheel is spinning
 struct DotView: View {
     @State var delay: Double = 0
     @State var scale: CGFloat = 0.5
