@@ -71,6 +71,17 @@ struct HowToPlay: View {
                             Text("If none of them is matched with the result value, your money will decrease by 100 and your score will not increase")
                         }
                         .listRowBackground(Color("ColorYellow"))
+                        
+                        Section(header: Text("Achievement badges")
+                                            .foregroundColor(Color("SectionHeaderColor"))
+                                            .font(.title)
+                                            .fontWeight(.bold)) {
+                            Text("To achieve Pro badge, you need to reach 1000 points")
+                            Text("To achieve Master badge, you need to reach 5000 points")
+                            Text("To achieve Legend badge, you need to reach 10000 points")
+
+                        }
+                        .listRowBackground(Color("ColorYellow"))
                     }
                     .foregroundColor(.black)
                     .padding(.bottom, backToMenu ? UIDevice.current.userInterfaceIdiom == .phone ? 30 : 65 : 0)
