@@ -47,6 +47,7 @@ struct GameView: View {
     @State private var resultStatus: ResultStatus = .SM
     @State private var statusAppear = false
     
+    // DispatchWorkItem to trigger checkWinning function to update user's money and high score
     @State private var currentWorkItem: DispatchWorkItem = DispatchWorkItem {}
     private func workItem() -> DispatchWorkItem {
         return DispatchWorkItem {
@@ -147,6 +148,7 @@ struct GameView: View {
                     }.modifier(StatusTextFieldModifier())
                 }
                 
+                // display animating waiting text while the roulette wheel is spinning. When the wheel stop, display the result
                 if (self.isAnimating) {
                     spinningText()
                 } else {
@@ -169,6 +171,7 @@ struct GameView: View {
                     showInput = true
                     sectorsToBet = []
                     
+                    // restrict the number of sectors users can bet based on difficulty level
                     if (level == Level.easy) {
                         numOfSectorsToBet = 6
                     } else if (level == Level.medium) {
@@ -201,7 +204,7 @@ struct GameView: View {
                 emptySound()
                 playSound(sound: "background_music_menu", type: "mp3", loop: true)
                 resume = true
-                currentWorkItem.cancel()
+                currentWorkItem.cancel() // cancel the checkWinning function when users go back to home menu
                 dismiss()
             }) {
               Image(systemName: "house.circle")
