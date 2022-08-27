@@ -1,9 +1,14 @@
-//
-//  GameView.swift
-//  RMIT_Roulette
-//
-//  Created by Tuan Dao on 15/08/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 2
+  Author: Dao Kha Tuan
+  ID: 3877347
+  Created  date: 14/08/2022
+  Last modified: 27/08/2022
+  Acknowledgement: None
+*/
 
 import SwiftUI
 import AudioToolbox
@@ -323,7 +328,7 @@ struct GameView: View {
                         isAnimating = true
                         rand = Double.random(in: 1...360)
                         withAnimation(spinAnimation) { // trigger the spinning animation of roulette wheel
-                            spinDegrees += 720.0 + rand - rand
+                            spinDegrees += 720.0 + rand
                         }
                         newAngle = getAngle(angle: spinDegrees)
                         

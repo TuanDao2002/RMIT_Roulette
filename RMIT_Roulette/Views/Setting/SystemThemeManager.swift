@@ -1,9 +1,14 @@
-//
-//  SystemThemeManager.swift
-//  RMIT_Roulette
-//
-//  Created by Tuan Dao on 22/08/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 2
+  Author: Dao Kha Tuan
+  ID: 3877347
+  Created  date: 14/08/2022
+  Last modified: 27/08/2022
+  Acknowledgement: None
+*/
 
 import Foundation
 import UIKit
